@@ -39,8 +39,7 @@ public class ContractEntity{
         this.agreedDeliveryDate=agreedDeliveryDate;
     }
     public  getAgreedDeliveryDate(){
-        return ;
+        return agreedDeliveryDate;
     }
     
-       
 }
