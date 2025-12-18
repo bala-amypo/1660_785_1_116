@@ -33,6 +33,6 @@ public class ContractEntity{
         this.counterpartyName=counterpartyName;
     }
     public  getCounterpartyName(){
-        return id;
+        return counterpartyName;
     }
 }
