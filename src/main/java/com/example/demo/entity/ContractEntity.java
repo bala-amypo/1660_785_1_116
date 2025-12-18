@@ -8,5 +8,5 @@ public class ContractEntity{
     private Date agreedDeliveryDate;
     private Double baseContractValue;
     private String status;
-    
+    private Date created
 }
