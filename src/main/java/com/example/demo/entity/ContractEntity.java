@@ -10,4 +10,6 @@ public class ContractEntity{
     private String status;
     private Date createdAt;
     private Date updatedAt;
+
+    
 }
