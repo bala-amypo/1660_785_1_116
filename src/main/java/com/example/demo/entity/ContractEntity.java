@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.Date;
+
 public class ContractEntity{
     private Long id;
     private String contractNumber;
@@ -32,7 +34,7 @@ public class ContractEntity{
     public void setCounterpartyName(String counterpartyName){
         this.counterpartyName=counterpartyName;
     }
-    public  getCounterpartyName(){
+    public  String getCounterpartyName(){
         return counterpartyName;
     }
     public void SetAgreedDeliveryDate(String agreedDeliveryDate){
@@ -64,4 +66,7 @@ public class ContractEntity{
     }
     public String getUpdatedAt(){
         return updatedAt;
+    }
+
+
 }
