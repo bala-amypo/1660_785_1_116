@@ -35,4 +35,10 @@ public class ContractEntity{
     public  getCounterpartyName(){
         return counterpartyName;
     }
+    public void set(Long id){
+        this.id=id;
+    }
+    public Long getId(){
+        return id;
+    }   
 }
