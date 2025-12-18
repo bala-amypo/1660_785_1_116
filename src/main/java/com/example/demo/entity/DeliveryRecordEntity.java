@@ -25,7 +25,7 @@ public class DeliveryRecordEntity{
         this.contract=contract;
     }
     public Contract getContract(){
-        return contrac;
+        return contract;
     }
     public void SetDeliveryDate(Date deliveryDate){
         this.deliveryDate=deliveryDate;
