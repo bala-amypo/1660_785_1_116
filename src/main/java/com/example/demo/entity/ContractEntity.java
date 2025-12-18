@@ -41,10 +41,10 @@ public class ContractEntity{
     public  getAgreedDeliveryDate(){
         return agreedDeliveryDate;
     }
-    public void setBaseContract(String title){
-        this.title=title;
+    public void setBaseContract(BigDecimal title){
+        this.basecontract=basecontract;
     }
-    public String getTitle(){
+    public String getbasecontract(){
         return title;
     }
     
