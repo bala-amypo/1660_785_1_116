@@ -45,8 +45,8 @@ public class DeliveryRecordEntity{
         return createdAt;
     }
 
-    public class DeliveryRecord(Long id, Contract contract, Date deliveryDate;
-    String notes, LocalDateTime createdAt){
+    public DeliveryRecord(Long id, Contract contract, Date deliveryDate,
+        String notes, LocalDateTime createdAt){
 
         this.id=id;
         this.contract=contract;
