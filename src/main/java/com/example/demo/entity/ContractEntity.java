@@ -8,7 +8,7 @@ public class ContractEntity{
     private Date agreedDeliveryDate;
     private BigDecimal baseContractValue;
     private String status;
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     private Timestamp updatedAt;
 
     public void setId(Long id){
@@ -27,7 +27,7 @@ public class ContractEntity{
         this.title=title;
     }
     public String getTitle(){
-        return id;
+        return title;
     }
     public void setCounterpartyName(String counterpartyName){
         this.counterpartyName=counterpartyName;
@@ -40,6 +40,12 @@ public class ContractEntity{
     }
     public  getAgreedDeliveryDate(){
         return agreedDeliveryDate;
+    }
+    public void setBaseContract(String title){
+        this.title=title;
+    }
+    public String getTitle(){
+        return title;
     }
     
 }
