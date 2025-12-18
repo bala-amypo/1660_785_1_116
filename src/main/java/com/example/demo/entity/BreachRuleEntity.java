@@ -40,10 +40,22 @@ public class BreachRuleEntity{
     public BigDecimal getPenaltyPerDay(){
         return penaltyPerDay;
     }
-    public void setRuleName(String ruleName){
-        this.ruleName=ruleName;
+    public void setMaxPenaltyPercentage(Double maxPenaltyPercentage){
+        this.maxPenaltyPercentage=maxPenaltyPercentage;
     }
-    public String getruleName(){
-        return ruleName;
-    
+    public Double getMaxPenaltyPercentage(){
+        return maxPenaltyPercentage;
+    }
+    public void setActive(Boolean active){
+        this.active=active;
+    }
+    public Boolean getactive(){
+        return active;
+    }
+    public void setActive(Boolean active){
+        this.active=active;
+    }
+    public Boolean getactive(){
+        return active;
+    }
 }
