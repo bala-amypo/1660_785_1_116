@@ -17,14 +17,20 @@ public class ContractEntity{
     public Long getId(){
         return id;
     }
+    public void setContractNumber(String contractNumber){
+        this.contractNumber=contractNumber;
+    }
+    public String getContractNumber(){
+        return contractNumber;
+    }
     public void setTitle(String title){
         this.title=title;
     }
-    public String getId(){
+    public String getTitle(){
         return id;
     }
-    public void setId(Long id){
-        this.id=id;
+    public void setCounterpartyName(String counterpartyName){
+        this.counterpartyName=id;
     }
     public Long getId(){
         return id;
