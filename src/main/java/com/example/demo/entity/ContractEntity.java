@@ -6,7 +6,8 @@ public class ContractEntity{
     private String title;
     private String counterpartyName;
     private Date agreedDeliveryDate;
-    private Double baseContractValue;
+    private BigDecimal baseContractValue;
     private String status;
-    private Date created
+    private Date createdAt;
+    private Date updatedAt;
 }
