@@ -35,8 +35,8 @@ public class ContractEntity{
     public  getCounterpartyName(){
         return counterpartyName;
     }
-    public void agreed(Long id){
-        this.id=id;
+    public void SetAgreedDeliveryDate(Long id){
+        this.=id;
     }
     public Long getId(){
         return id;
