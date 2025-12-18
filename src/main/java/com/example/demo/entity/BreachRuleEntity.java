@@ -52,10 +52,41 @@ public class BreachRuleEntity{
     public Boolean getactive(){
         return active;
     }
+    public void setIsDefaultRule(Boolean isDefaultRule){
+        this.isDefaultRule=isDefaultRule;
+    }
+    public Boolean getisDefaultRule(){
+        return isDefaultRule;
+    }
+
+    public BreachRule(Long id,String ruleName,BigDecimal penaltyPerDay,
+        Double maxPenaltyPercentage,Boolean active,Boolean isDefaultRule){
+           
+        this.id=id;
+        this.ruleName=ruleName;
+        this.ruleName=ruleName;
+        this.penaltyPerDay=penaltyPerDay;
+    }
+    public BigDecimal getPenaltyPerDay(){
+        return penaltyPerDay;
+    }
+    public void setMaxPenaltyPercentage(Double maxPenaltyPercentage){
+        this.maxPenaltyPercentage=maxPenaltyPercentage;
+    }
+    public Double getMaxPenaltyPercentage(){
+        return maxPenaltyPercentage;
+    }
     public void setActive(Boolean active){
         this.active=active;
     }
     public Boolean getactive(){
         return active;
     }
+    public void setIsDefaultRule(Boolean isDefaultRule){
+        this.isDefaultRule=isDefaultRule;
+    }
+    public Boolean getisDefaultRule(){
+        return isDefaultRule;
+    }
+        }
 }
