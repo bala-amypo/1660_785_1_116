@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.util.Date;
 import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 @Entity
 public class DeliveryRecordEntity{
      @Id
@@ -43,9 +45,15 @@ public class DeliveryRecordEntity{
         return createdAt;
     }
 
-    public class DeliveryRecord(Long id,Contract contract;
-    private Date deliveryDate;
-    private String notes;
-    private LocalDateTime createdAt;
-    )
+    public class DeliveryRecord(Long id, Contract contract, Date deliveryDate;
+    String notes, LocalDateTime createdAt){
+
+        this.id=id;
+        this.contract=contract;
+        this.deliveryDate=deliveryDate;
+        this.notes=notes;
+        this.createdAt=createdAt;
+    }
+    public class DeliveryRecord(){
+    }
 }
