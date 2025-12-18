@@ -1,3 +1,5 @@
 package com.example.demo.repository;
 
-public interface BreachRuleRepository
+public interface BreachRuleRepository{
+    
+}
