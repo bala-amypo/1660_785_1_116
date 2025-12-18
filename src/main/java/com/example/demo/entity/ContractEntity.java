@@ -30,9 +30,9 @@ public class ContractEntity{
         return id;
     }
     public void setCounterpartyName(String counterpartyName){
-        this.counterpartyName=id;
+        this.counterpartyName=counterpartyName;
     }
-    public Long getId(){
+    public  getCounterpartyName(){
         return id;
     }
 }
