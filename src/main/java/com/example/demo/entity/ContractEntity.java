@@ -63,13 +63,13 @@ public class ContractEntity{
     public void setcreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
-    public String getCreatedAt(){
+    public LocalDateTime getCreatedAt(){
         return createdAt;
     }
     public void setUpdatedAt(LocalDateTime updatedAt){
         this.updatedAt=updatedAt;
     }
-    public String getUpdatedAt(){
+    public LocalDateTime getUpdatedAt(){
         return updatedAt;
     }
 

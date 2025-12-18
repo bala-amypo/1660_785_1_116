@@ -21,14 +21,14 @@ public class DeliveryRecordEntity{
     public void setContract(Contract contract){
         this.contract=contract;
     }
-    public String getContract(){
-        return contractNumber;
+    public Contract getContract(){
+        return contrac;
     }
-    public void SetDeliveryDate(Date DeliveryDate){
-        this.agreDeliveryDate=agreedDeliveryDate;
+    public void SetDeliveryDate(Date deliveryDate){
+        this.deliveryDate=deliveryDate;
     }
-    public  Date getAgreedDeliveryDate(){
-        return agreedDeliveryDate;
+    public  Date DeliveryDate(){
+        return deliveryDate;
     }
     public void setNotes(String notes){
         this.notes=notes;
@@ -36,4 +36,16 @@ public class DeliveryRecordEntity{
     public String getNotes(){
         return notes;
     }
+    public void setcreatedAt(LocalDateTime createdAt){
+        this.createdAt=createdAt;
+    }
+    public LocalDateTime getCreatedAt(){
+        return createdAt;
+    }
+
+    public class DeliveryRecord(Long id,Contract contract;
+    private Date deliveryDate;
+    private String notes;
+    private LocalDateTime createdAt;
+    )
 }
