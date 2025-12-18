@@ -38,13 +38,13 @@ public class ContractEntity{
     public void SetAgreedDeliveryDate(String agreedDeliveryDate){
         this.agreedDeliveryDate=agreedDeliveryDate;
     }
-    public  getAgreedDeliveryDate(){
+    public  Date getAgreedDeliveryDate(){
         return agreedDeliveryDate;
     }
     public void setBaseContract(BigDecimal title){
         this.basecontract=basecontract;
     }
-    public String getbasecontract(){
+    public BigDecimal getbasecontract(){
         return basecontract;
     }
     public void setStatus(String status){
@@ -57,5 +57,11 @@ public class ContractEntity{
         this.createdAt=createdAt;
     }
     public String getCreatedAt(){
-        return status;
+        return createdAt;
+    }
+    public void setUpdatedAt(LocalDateTime updatedAt){
+        this.updatedAt=updatedAt;
+    }
+    public String getUpdatedAt(){
+        return updatedAt;
 }
