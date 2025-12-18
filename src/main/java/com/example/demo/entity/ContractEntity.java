@@ -9,7 +9,7 @@ public class ContractEntity{
     private BigDecimal baseContractValue;
     private String status;
     private LocalDateTime createdAt;
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public void setId(Long id){
         this.id=id;
@@ -45,7 +45,17 @@ public class ContractEntity{
         this.basecontract=basecontract;
     }
     public String getbasecontract(){
-        return title;
+        return basecontract;
     }
-    
+    public void setStatus(String status){
+        this.status=status;
+    }
+    public String getStatus(){
+        return status;
+    }
+    public void setcreatedAt(LocalDateTime createdAt){
+        this.createdAt=createdAt;
+    }
+    public String getCreatedAt(){
+        return status;
 }
