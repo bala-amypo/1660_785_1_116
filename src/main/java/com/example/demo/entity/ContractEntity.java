@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Entity
 public class ContractEntity{
     @Id
@@ -43,17 +46,17 @@ public class ContractEntity{
     public  String getCounterpartyName(){
         return counterpartyName;
     }
-    public void SetAgreedDeliveryDate(String agreedDeliveryDate){
+    public void setAgreedDeliveryDate(Date agreedDeliveryDate){
         this.agreedDeliveryDate=agreedDeliveryDate;
     }
     public  Date getAgreedDeliveryDate(){
         return agreedDeliveryDate;
     }
-    public void setBaseContract(BigDecimal title){
-        this.basecontract=basecontract;
+    public void setBaseContractValue(BigDecimal baseContractValue){
+        this.baseContractValue = baseContractValue;
     }
-    public BigDecimal getbasecontract(){
-        return basecontract;
+    public BigDecimal getBaseContractValue(){
+        return baseContractValue;
     }
     public void setStatus(String status){
         this.status=status;
@@ -61,7 +64,7 @@ public class ContractEntity{
     public String getStatus(){
         return status;
     }
-    public void setcreatedAt(LocalDateTime createdAt){
+    public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
     public LocalDateTime getCreatedAt(){
@@ -79,10 +82,11 @@ public class ContractEntity{
     BigDecimal baseContractValue,String status,LocalDateTime createdAt,
     LocalDateTime updatedAt){
         this.id=id;
+        this.title=title;
         this.contractNumber=contractNumber;
         this.counterpartyName=counterpartyName;
         this.agreedDeliveryDate=agreedDeliveryDate;
-        this.basecontract=basecontract;
+        this.baseContractValue=baseContractValue;
         this.status=status;
         this.createdAt=createdAt;
         this.updatedAt=updatedAt;
