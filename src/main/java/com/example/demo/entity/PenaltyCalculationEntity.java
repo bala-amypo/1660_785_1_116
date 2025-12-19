@@ -45,6 +45,12 @@ public class PenaltyCalculationEntity{
     public BigDecimal getCalculatedPenalty(){
         return calculatedPenalty;
     }
+    public void setAppliedRule(BreachRule appliedRule){
+        this.appliedRule=appliedRule;
+    }
+    public BreachRule getAppliedRule(){
+        return appliedRule;
+    }
     public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
@@ -57,8 +63,9 @@ public class PenaltyCalculationEntity{
 
         this.id=id;
         this.contract=contract;
-        this.deliveryDate=deliveryDate;
-        this.notes=notes;
+        this.daysDelayed=daysDelayed;
+          this.calculatedPenalty=calculatedPenalty;
+          this.appliedRule=appliedRule;
         this.createdAt=createdAt;
     }
     public  DeliveryRecordEntity(){
