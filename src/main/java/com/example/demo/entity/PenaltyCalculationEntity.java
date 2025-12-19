@@ -58,17 +58,18 @@ public class PenaltyCalculationEntity{
         return createdAt;
     }
 
-    public DeliveryRecordEntity(Long id, Contract contract, Date deliveryDate,
-        String notes, LocalDateTime createdAt){
+    public PenaltyCalculationEntity(Long id, Contract contract,Integer daysDelayed,
+    BigDecimal calculatedPenalty,BreachRule appliedRule,
+    LocalDateTime createdAt){
 
         this.id=id;
         this.contract=contract;
         this.daysDelayed=daysDelayed;
-          this.calculatedPenalty=calculatedPenalty;
-          this.appliedRule=appliedRule;
+        this.calculatedPenalty=calculatedPenalty;
+        this.appliedRule=appliedRule;
         this.createdAt=createdAt;
     }
-    public  DeliveryRecordEntity(){
+    public PenaltyCalculationEntity(){
+
     }
-}
 }
