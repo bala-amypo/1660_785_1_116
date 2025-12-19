@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class BreachReportEntity{
