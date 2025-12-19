@@ -13,7 +13,7 @@ public class BreachRepositoryEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Contract contract;
-    private LocalTimeDate reportGeneratedAt;
+    private LocalDateTime reportGeneratedAt;
     private Integer daysDelayed;
     private BigDecimal penaltyAmount;
     private String remarks;
@@ -30,10 +30,10 @@ public class BreachRepositoryEntity{
     public void setContract(Contract contract) {
         this.contract = contract;
     }
-    public LocalTimeDate getReportGeneratedAt() {
+    public LocalDateTime getReportGeneratedAt() {
         return reportGeneratedAt;
     }
-    public void setReportGeneratedAt(LocalTimeDate reportGeneratedAt) {
+    public void setReportGeneratedAt(LocalDateTime reportGeneratedAt) {
         this.reportGeneratedAt = reportGeneratedAt;
     }
     public Integer getDaysDelayed() {
@@ -54,7 +54,7 @@ public class BreachRepositoryEntity{
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-    public BreachRepositoryEntity(Long id, Contract contract, LocalTimeDate reportGeneratedAt, Integer daysDelayed,
+    public BreachReportEntity(Long id, Contract contract, LocalDateTime reportGeneratedAt, Integer daysDelayed,
             BigDecimal penaltyAmount, String remarks) {
         this.id = id;
         this.contract = contract;
@@ -63,7 +63,7 @@ public class BreachRepositoryEntity{
         this.penaltyAmount = penaltyAmount;
         this.remarks = remarks;
     }
-    public BreachRepositoryEntity() {
+    public BreachReportEntity() {
     }
 
 }
