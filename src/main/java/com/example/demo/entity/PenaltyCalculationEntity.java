@@ -13,6 +13,8 @@ public class PenaltyCalculationEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne
+    private Contract contract;
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
     private LocalDateTime calculatedAt;
