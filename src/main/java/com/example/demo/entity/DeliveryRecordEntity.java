@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Present;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,6 +14,7 @@ public class DeliveryRecordEntity{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private Contract contract;
+    @Present
     private Date deliveryDate;
     private String notes;
     private LocalDateTime createdAt;
