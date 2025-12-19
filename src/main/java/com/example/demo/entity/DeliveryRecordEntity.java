@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import java.time.LocalDateTime;
+
 @Entity
 public class DeliveryRecordEntity{
      @Id
@@ -27,10 +29,10 @@ public class DeliveryRecordEntity{
     public Contract getContract(){
         return contract;
     }
-    public void SetDeliveryDate(Date deliveryDate){
+    public void setDeliveryDate(Date deliveryDate){
         this.deliveryDate=deliveryDate;
     }
-    public  Date DeliveryDate(){
+    public  Date getDeliveryDate(){
         return deliveryDate;
     }
     public void setNotes(String notes){
@@ -39,14 +41,14 @@ public class DeliveryRecordEntity{
     public String getNotes(){
         return notes;
     }
-    public void setcreatedAt(LocalDateTime createdAt){
+    public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
     public LocalDateTime getCreatedAt(){
         return createdAt;
     }
 
-    public DeliveryRecord(Long id, Contract contract, Date deliveryDate,
+    public DeliveryRecordEntity(Long id, Contract contract, Date deliveryDate,
         String notes, LocalDateTime createdAt){
 
         this.id=id;
@@ -55,6 +57,6 @@ public class DeliveryRecordEntity{
         this.notes=notes;
         this.createdAt=createdAt;
     }
-    public class DeliveryRecord(){
+    public  DeliveryRecordEntity(){
     }
 }
