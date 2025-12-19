@@ -8,10 +8,11 @@ import java.time.LocalDateTime;
 import java.math.BigDecimal;
 
 @Entity
-public class BreachRepositoryEntity{
+public class BreachReportEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne
     private Contract contract;
     private LocalDateTime reportGeneratedAt;
     private Integer daysDelayed;
