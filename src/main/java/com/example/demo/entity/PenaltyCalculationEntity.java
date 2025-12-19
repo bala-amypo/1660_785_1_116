@@ -33,17 +33,17 @@ public class PenaltyCalculationEntity{
     public Contract getContract(){
         return contract;
     }
-    public void set(Date deliveryDate){
-        this.deliveryDate=deliveryDate;
+    public void setDaysDelayed(Integer daysDelayed){
+        this.daysDelayed=daysDelayed;
     }
-    public  Date getDeliveryDate(){
-        return deliveryDate;
+    public  Integer getDaysDelayed(){
+        return daysDelayed;
     }
-    public void setNotes(String notes){
-        this.notes=notes;
+    public void setCalculatedPenalty(BigDecimal calculatedPenalty){
+        this.calculatedPenalty=calculatedPenalty;
     }
-    public String getNotes(){
-        return notes;
+    public BigDecimal getCalculatedPenalty(){
+        return calculatedPenalty;
     }
     public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
