@@ -16,5 +16,6 @@ public class BreachRepositoryEntity{
     private Contract contract;
     private LocalTimeDate reportGeneratedAt;
     private Integer daysDelayed;
-    private BigDecimal Penalty;
+    private BigDecimal penaltyAmount;
+    private String remarks;
 }
