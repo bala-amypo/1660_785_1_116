@@ -1,7 +1,17 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import java.time.LocalDateTime;
+
+@Entity
+
 public class UserEntity{
     private Long id;
+    @Column
     private String email;
     private String password;
     private String roles;
