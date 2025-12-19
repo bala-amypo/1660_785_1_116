@@ -4,15 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import java.time.LocalDateTime;
+import java.math.BigDecimal;
 @Entity
 @Data
 @AllArgsConstructor
-@NoAr
+@NoArgsConstructor
 public class PenaltyCalculationEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer daysDelayed;
-    private Double calculatedPenalty;
+    private BigDecimal calculatedPenalty;
     private LocalDateTime calculatedAt;
 }
