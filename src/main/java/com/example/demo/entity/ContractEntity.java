@@ -19,8 +19,8 @@ public class ContractEntity{
     private Date agreedDeliveryDate;
     private BigDecimal baseContractValue;
     private String status;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public void setId(Long id){
         this.id=id;
