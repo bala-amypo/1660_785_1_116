@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
 
+import jakarta.persistence.OneToOne;
 @Entity
 
 public class PenaltyCalculationEntity{
@@ -17,6 +18,7 @@ public class PenaltyCalculationEntity{
     private Contract contract;
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
+    private BreachRule appliedRule;
     private LocalDateTime calculatedAt;
 
     public void setId(Long id){
@@ -31,7 +33,7 @@ public class PenaltyCalculationEntity{
     public Contract getContract(){
         return contract;
     }
-    public void setDeliveryDate(Date deliveryDate){
+    public void set(Date deliveryDate){
         this.deliveryDate=deliveryDate;
     }
     public  Date getDeliveryDate(){
