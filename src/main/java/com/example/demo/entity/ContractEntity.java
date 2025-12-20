@@ -86,11 +86,18 @@ public class ContractEntity {
     public void setStatus(String status) {
         this.status = status;
     }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
