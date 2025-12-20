@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
+import jakarta.validation.constraints.Min;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.OneToOne;
 @Entity
@@ -16,9 +19,11 @@ public class PenaltyCalculationEntity{
     private Long id;
     @OneToOne
     private Contract contract;
+    @Min(0)
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
-    private BreachRule appliedRule;
+    @ManyToOne
+    private BreachRuleEntity appliedRule;
     private LocalDateTime calculatedAt;
 
     public void setId(Long id){
