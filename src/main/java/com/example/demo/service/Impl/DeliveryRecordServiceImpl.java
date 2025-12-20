@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import org.springframework.stereotype.Service
 import com.example.demo.entity.DeliveryRecordEntity;
 import com.example.demo.repository.DeliveryRecordRepository;
 import com.example.demo.repository.ContractRepository;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 
     private DeliveryRecordRepository deliveryRepo;

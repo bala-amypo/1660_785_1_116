@@ -3,10 +3,11 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.ContractEntity;
 import com.example.demo.repository.ContractRepository;
 import com.example.demo.service.ContractService;
-
+import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class ContractServiceImpl implements ContractService {
 
     private ContractRepository contractRepo;

@@ -1,11 +1,12 @@
 package com.example.demo.service.impl;
 
+import org.springframework.stereotype.Service;
 import com.example.demo.entity.BreachRuleEntity;
 import com.example.demo.repository.BreachRuleRepository;
 import com.example.demo.service.BreachRuleService;
 
 import java.util.List;
-
+@Service
 public class BreachRuleServiceImpl implements BreachRuleService {
 
     private BreachRuleRepository ruleRepo;

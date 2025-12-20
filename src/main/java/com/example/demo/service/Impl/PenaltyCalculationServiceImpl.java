@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import org.springframework.stereotype.Service;
 import com.example.demo.entity.ContractEntity;
 import com.example.demo.entity.BreachRuleEntity;
 import com.example.demo.entity.PenaltyCalculationEntity;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class PenaltyCalculationServiceImpl
         implements PenaltyCalculationService {
 
