@@ -10,4 +10,7 @@ public interface BreachReportService {
     BreachReportEntity getReportById(Long id);
 
     List<BreachReportEntity> getReportsForContract(Long contractId);
+
+    List<BreachReportEntity> getAllReports();
+
 }
