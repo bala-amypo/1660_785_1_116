@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Contract;
+import com.example.demo.entity.ContractEntity;
 import com.example.demo.service.ContractService;
 
 import java.util.List;
@@ -14,38 +14,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/api/contracts")
+@RequestMapping("/contracts")
 public class ContractController {
 
-    private final ContractService service;
+    private ContractService contractService;
 
-    public ContractController(ContractService service) {
-        this.service = service;
+    public ContractController(ContractService contractService) {
+        this.contractService = contractService;
     }
 
     @PostMapping
-    public Contract create(@RequestBody Contract contract) {
-        return service.createContract(contract);
+    public ContractEntity createContract(
+            @RequestBody ContractEntity contract) {
+        return contractService.createContract(contract);
     }
 
     @PutMapping("/{id}")
-    public Contract update(@PathVariable Long id,
-                           @RequestBody Contract contract) {
-        return service.updateContract(id, contract);
+    public ContractEntity updateContract(
+            @PathVariable Long id,
+            @RequestBody ContractEntity contract) {
+        return contractService.updateContract(id, contract);
     }
 
     @GetMapping("/{id}")
-    public Contract getById(@PathVariable Long id) {
-        return service.getContractById(id);
+    public ContractEntity getContractById(
+            @PathVariable Long id) {
+        return contractService.getContractById(id);
     }
 
     @GetMapping
-    public List<Contract> getAll() {
-        return service.getAllContracts();
-    }
-
-    @PutMapping("/{id}/status")
-    public void updateStatus(@PathVariable Long id) {
-        service.updateContractStatus(id);
+    public List<ContractEntity> getAllContracts() {
+        return contractService.getAllContracts();
     }
 }
