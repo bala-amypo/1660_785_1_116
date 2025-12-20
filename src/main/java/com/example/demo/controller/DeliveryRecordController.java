@@ -35,7 +35,7 @@ public class DeliveryRecordServiceImpl
                 .orElseThrow(() ->
                         new RuntimeException("Contract not found"));
 
-        record.setContract(contract);   // 🔥 IMPORTANT
+        record.setContract(contract);  
         record.setCreatedAt(LocalDateTime.now());
 
         return deliveryRepo.save(record);
