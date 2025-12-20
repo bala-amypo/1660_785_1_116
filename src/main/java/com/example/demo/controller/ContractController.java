@@ -51,4 +51,10 @@ public class ContractController {
             @PathVariable Long id) {
         contractService.updateContractStatus(id);
     }
+
+    @PutMapping("/{id}/status")
+    public void updateContractStatus(@PathVariable Long id) {
+    contractService.updateContractStatus(id);
+}
+
 }

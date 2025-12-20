@@ -52,4 +52,14 @@ public class ContractServiceImpl implements ContractService {
     public List<ContractEntity> getAllContracts() {
         return contractRepo.findAll();
     }
+
+    @Override
+    public void updateContractStatus(Long id) {
+    ContractEntity contract = contractRepo.findById(id).orElse(null);
+        if (contract != null) {
+        contract.setUpdatedAt(LocalDateTime.now());
+        contractRepo.save(contract);
+    }
+}
+
 }
