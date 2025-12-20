@@ -1,58 +1,61 @@
-package com.example.demo.controller;
+package com.example.demo.service.impl;
 
+import com.example.demo.entity.ContractEntity;
 import com.example.demo.entity.DeliveryRecordEntity;
+import com.example.demo.repository.ContractRepository;
+import com.example.demo.repository.DeliveryRecordRepository;
 import com.example.demo.service.DeliveryRecordService;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
-@RequestMapping("/delivery-records")
-public class DeliveryRecordController {
+@Service
+public class DeliveryRecordServiceImpl
+        implements DeliveryRecordService {
 
-    private DeliveryRecordService deliveryService;
+    private DeliveryRecordRepository deliveryRepo;
+    private ContractRepository contractRepo;
 
-    public DeliveryRecordController(
-            DeliveryRecordService deliveryService) {
-        this.deliveryService = deliveryService;
+    public DeliveryRecordServiceImpl(
+            DeliveryRecordRepository deliveryRepo,
+            ContractRepository contractRepo) {
+        this.deliveryRepo = deliveryRepo;
+        this.contractRepo = contractRepo;
     }
 
-    // @PostMapping
-    // public DeliveryRecordEntity create(
-    //         @RequestBody DeliveryRecordEntity record) {
-    //     return deliveryService.createDeliveryRecord(record);
-    // }
-    @PostMapping
-    public ResponseEntity<DeliveryRecordEntity> create(
-            @RequestBody DeliveryRecordEntity record) {
-        return ResponseEntity.ok(deliveryService.createDeliveryRecord(record));
+    @Override
+    public DeliveryRecordEntity createDeliveryRecord(
+            DeliveryRecordEntity record) {
+
+        Long contractId = record.getContract().getId();
+
+        ContractEntity contract = contractRepo.findById(contractId)
+                .orElseThrow(() ->
+                        new RuntimeException("Contract not found"));
+
+        record.setContract(contract);   // 🔥 IMPORTANT
+        record.setCreatedAt(LocalDateTime.now());
+
+        return deliveryRepo.save(record);
     }
 
-
-    @GetMapping("/{id}")
-    public DeliveryRecordEntity getById(@PathVariable Long id) {
-        return deliveryService.getRecordById(id);
+    @Override
+    public DeliveryRecordEntity getRecordById(Long id) {
+        return deliveryRepo.findById(id).orElse(null);
     }
 
-    @GetMapping("/contract/{contractId}")
+    @Override
     public List<DeliveryRecordEntity>
-    getByContract(@PathVariable Long contractId) {
-        return deliveryService
-                .getDeliveryRecordsForContract(contractId);
+    getDeliveryRecordsForContract(Long contractId) {
+        return deliveryRepo
+                .findByContractIdOrderByDeliveryDateAsc(contractId);
     }
 
-    @GetMapping("/contract/{contractId}/latest")
-    public DeliveryRecordEntity getLatest(
-            @PathVariable Long contractId) {
-        return deliveryService
-                .getLatestDeliveryRecord(contractId);
+    @Override
+    public DeliveryRecordEntity getLatestDeliveryRecord(Long contractId) {
+        return deliveryRepo
+                .findFirstByContractIdOrderByDeliveryDateDesc(contractId);
     }
 }
-
