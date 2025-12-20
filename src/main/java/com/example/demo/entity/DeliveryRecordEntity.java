@@ -6,6 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Present;
+import jakarta.persistence.Past;
+import jakarta.persistence.Many;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,8 +15,9 @@ public class DeliveryRecordEntity{
      @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
     private Contract contract;
-    @Present
+    @PastOrPresent
     private Date deliveryDate;
     private String notes;
     private LocalDateTime createdAt;
