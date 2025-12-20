@@ -1,5 +1,40 @@
-package com.example.demo.service.Impl;
+package com.example.demo.service.impl;
 
-public class ContractServiceImpl{
-    
-}
+import com.example.demo.entity.Contract;
+import com.example.demo.entity.DeliveryRecordEntity;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.ContractRepository;
+import com.example.demo.repository.DeliveryRecordRepository;
+import com.example.demo.service.ContractService;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class ContractServiceImpl implements ContractService {
+
+    private final ContractRepository contractRepo;
+    private final DeliveryRecordRepository deliveryRepo;
+
+    public ContractServiceImpl(ContractRepository contractRepo,
+                               DeliveryRecordRepository deliveryRepo) {
+        this.contractRepo = contractRepo;
+        this.deliveryRepo = deliveryRepo;
+    }
+
+    @Override
+    public Contract createContract(Contract contract) {
+        contract.setStatus("ACTIVE");
+        contract.setCreatedAt(LocalDateTime.now());
+        return contractRepo.save(contract);
+    }
+
+    @Override
+    public Contract updateContract(Long id, Contract contract) {
+        Contract c = getContractById(id);
+        c.setTitle(contract.getTitle());
+        c.setCounterpartyName(contract.getCounterpartyName());
+        c.setAgreedDeliveryDate(contract.getAgreedDeliveryDate());
+        c.setBaseContractValue(contract.getBaseContractValue());
+        c.setUpdatedAt(LocalDateTime.now());
+        return contractRepo.save(c);
+    }
