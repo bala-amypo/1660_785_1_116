@@ -28,13 +28,4 @@ public class ContractServiceImpl implements ContractService {
         return contractRepo.save(contract);
     }
 
-    @Override
-    public Contract updateContract(Long id, Contract contract) {
-        Contract c = getContractById(id);
-        c.setTitle(contract.getTitle());
-        c.setCounterpartyName(contract.getCounterpartyName());
-        c.setAgreedDeliveryDate(contract.getAgreedDeliveryDate());
-        c.setBaseContractValue(contract.getBaseContractValue());
-        c.setUpdatedAt(LocalDateTime.now());
-        return contractRepo.save(c);
     }
