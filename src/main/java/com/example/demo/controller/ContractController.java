@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 @RestController
 @RequestMapping("/contracts")
 public class ContractController {
@@ -45,5 +46,9 @@ public class ContractController {
     @GetMapping
     public List<ContractEntity> getAllContracts() {
         return contractService.getAllContracts();
+    }
+    public void updateContractStatus(
+            @PathVariable Long id) {
+        contractService.updateContractStatus(id);
     }
 }
