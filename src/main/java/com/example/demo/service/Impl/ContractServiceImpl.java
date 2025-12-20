@@ -12,8 +12,8 @@ import java.util.List;
 
 public class ContractServiceImpl implements ContractService {
 
-    private final ContractRepository contractRepo;
-    private final DeliveryRecordRepository deliveryRepo;
+    private ContractRepository contractRepo;
+    private DeliveryRecordRepository deliveryRepo;
 
     public ContractServiceImpl(ContractRepository contractRepo,
                                DeliveryRecordRepository deliveryRepo) {
