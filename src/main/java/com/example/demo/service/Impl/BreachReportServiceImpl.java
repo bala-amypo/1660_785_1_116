@@ -67,4 +67,10 @@ public class BreachReportServiceImpl
     getReportsForContract(Long contractId) {
         return reportRepo.findByContractId(contractId);
     }
+
+    @Override
+    public List<BreachReportEntity> getAllReports() {
+        return reportRepo.findAll();
+}
+
 }
