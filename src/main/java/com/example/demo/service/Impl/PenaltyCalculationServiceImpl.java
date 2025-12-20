@@ -1,5 +1,5 @@
 package com.example.demo.service.Impl;
 
-public class PenaltyCalcuationService{
+public class PenaltyCalcuationServiceImpl{
     
 }
