@@ -38,4 +38,9 @@ public class BreachReportController {
             @PathVariable Long contractId) {
         return reportService.getReportsForContract(contractId);
     }
+
+    @GetMapping
+    public List<BreachReportEntity> getAllReports() {
+        return reportService.getAllReports();
+    }
 }
