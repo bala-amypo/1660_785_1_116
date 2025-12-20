@@ -1,5 +1,13 @@
- package com.example.demo.service;
+package com.example.demo.service;
 
- public interface BreachReportService{
-    
- }
+import com.example.demo.entity.BreachReportEntity;
+import java.util.List;
+
+public interface BreachReportService {
+
+    BreachReportEntity generateReport(Long contractId);
+
+    BreachReportEntity getReportById(Long id);
+
+    List<BreachReportEntity> getReportsForContract(Long contractId);
+}
