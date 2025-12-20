@@ -18,7 +18,7 @@ public class PenaltyCalculationEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    private Contract contract;
+    private ContractEntity contract;
     @Min(0)
     private Integer daysDelayed;
     @BigDecimal
@@ -33,10 +33,10 @@ public class PenaltyCalculationEntity{
     public Long getId(){
         return id;
     }
-    public void setContract(Contract contract){
+    public void setContract(ContractEntity contract){
         this.contract=contract;
     }
-    public Contract getContract(){
+    public ContractEntity getContract(){
         return contract;
     }
     public void setDaysDelayed(Integer daysDelayed){
@@ -51,10 +51,10 @@ public class PenaltyCalculationEntity{
     public BigDecimal getCalculatedPenalty(){
         return calculatedPenalty;
     }
-    public void setAppliedRule(BreachRule appliedRule){
+    public void setAppliedRule(BreachRuleEntity appliedRule){
         this.appliedRule=appliedRule;
     }
-    public BreachRule getAppliedRule(){
+    public BreachRuleEntity getAppliedRule(){
         return appliedRule;
     }
     public void setCreatedAt(LocalDateTime createdAt){
@@ -64,7 +64,7 @@ public class PenaltyCalculationEntity{
         return createdAt;
     }
 
-    public PenaltyCalculationEntity(Long id, Contract contract,Integer daysDelayed,
+    public PenaltyCalculationEntity(Long id, ContractEntity contract,Integer daysDelayed,
     BigDecimal calculatedPenalty,BreachRule appliedRule,
     LocalDateTime createdAt){
 

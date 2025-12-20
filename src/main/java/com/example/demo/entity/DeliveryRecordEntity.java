@@ -31,7 +31,7 @@ public class DeliveryRecordEntity{
     public void setContract(ContractEntity contract){
         this.contract=contract;
     }
-    public Contract getContract(){
+    public ContractEntity getContract(){
         return contract;
     }
     public void setDeliveryDate(Date deliveryDate){
@@ -53,7 +53,7 @@ public class DeliveryRecordEntity{
         return createdAt;
     }
 
-    public DeliveryRecordEntity(Long id, Contract contract, Date deliveryDate,
+    public DeliveryRecordEntity(Long id, ContractEntity contract, Date deliveryDate,
         String notes, LocalDateTime createdAt){
 
         this.id=id;
