@@ -50,9 +50,8 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void updateContractStatus(Long contractId) {
-        // simple version – no delivery logic
-        Contract c = getContractById(contractId);
-        c.setUpdatedAt(LocalDateTime.now());
-        contractRepo.save(c);
+        Contract con = getContractById(contractId);
+        con.setUpdatedAt(LocalDateTime.now());
+        contractRepo.save(con);
     }
 }
