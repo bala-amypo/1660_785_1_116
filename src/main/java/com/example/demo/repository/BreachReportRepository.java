@@ -7,5 +7,5 @@ import com.example.demo.entity.BreachReportEntity;
 
 @Repository
 public interface BreachReportRepository extends JpaRepository<BreachReportEntity,Long>{
-    
+    List<BreachReportEntity> findByContractId(Long contractId);
 }
