@@ -20,8 +20,9 @@ public class ContractEntity{
     private String counterpartyName;
     private Date agreedDeliveryDate;
     @min(0)
+    @DecimalMin
     private BigDecimal baseContractValue;
-    private String status;
+     private String status; ---
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

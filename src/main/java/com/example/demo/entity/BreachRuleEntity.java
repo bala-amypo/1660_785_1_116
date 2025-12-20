@@ -18,6 +18,7 @@ public class BreachRuleEntity {
     private Long id;
     @Column(unique=true)
     private String ruleName;
+    @BigDecimal
     private BigDecimal penaltyPerDay;
     @Min(0)
     @Max(100)

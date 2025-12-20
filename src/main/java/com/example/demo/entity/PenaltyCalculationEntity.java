@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.math.BigDecimal;
 import jakarta.validation.constraints.Min;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 import jakarta.persistence.OneToOne;
 @Entity
@@ -21,6 +21,7 @@ public class PenaltyCalculationEntity{
     private Contract contract;
     @Min(0)
     private Integer daysDelayed;
+    @BigDecimal
     private BigDecimal calculatedPenalty;
     @ManyToOne
     private BreachRuleEntity appliedRule;
