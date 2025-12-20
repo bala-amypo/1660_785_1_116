@@ -11,5 +11,5 @@ public interface ContractService {
 
     ContractEntity getContractById(Long id);
 
-    List<Contract> getAllContracts();
+    List<ContractEntity> getAllContracts();
 }

@@ -47,10 +47,6 @@ public class ContractController {
     public List<ContractEntity> getAllContracts() {
         return contractService.getAllContracts();
     }
-    public void updateContractStatus(
-            @PathVariable Long id) {
-        contractService.updateContractStatus(id);
-    }
 
     @PutMapping("/{id}/status")
     public void updateContractStatus(@PathVariable Long id) {
