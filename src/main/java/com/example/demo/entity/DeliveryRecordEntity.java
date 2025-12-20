@@ -5,8 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Present;
-import jakarta.persistence.Past;
+import jakarta.validation.constraints.Present;
+import jakarta.validation.constraints.Past;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
@@ -16,7 +16,7 @@ public class DeliveryRecordEntity{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Contract contract;
+    private ContractEntity contract;
     @PastOrPresent
     private Date deliveryDate;
     private String notes;
@@ -28,7 +28,7 @@ public class DeliveryRecordEntity{
     public Long getId(){
         return id;
     }
-    public void setContract(Contract contract){
+    public void setContract(ContractEntity contract){
         this.contract=contract;
     }
     public Contract getContract(){

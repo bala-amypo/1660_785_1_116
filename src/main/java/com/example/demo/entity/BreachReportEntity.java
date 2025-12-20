@@ -14,7 +14,7 @@ public class BreachReportEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Contract contract;
+    private ContractEntity contract;
     private LocalDateTime reportGeneratedAt;
     private Integer daysDelayed;
     private BigDecimal penaltyAmount;
@@ -26,10 +26,10 @@ public class BreachReportEntity{
     public void setId(Long id) {
         this.id = id;
     }
-    public Contract getContract() {
+    public ContractEntity getContract() {
         return contract;
     }
-    public void setContract(Contract contract) {
+    public void setContract(ContractEntity contract) {
         this.contract = contract;
     }
     public LocalDateTime getReportGeneratedAt() {
