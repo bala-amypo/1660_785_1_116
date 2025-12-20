@@ -24,7 +24,7 @@ public class DeliveryRecordController {
     }
 
     @PostMapping
-    public ResponseEntity<DeliveryRecordEntity> create(
+    public DeliveryRecordEntity create(
             @RequestBody DeliveryRecordEntity record) {
         return deliveryService.createDeliveryRecord(record);
     }
