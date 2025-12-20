@@ -21,7 +21,7 @@ public class PenaltyCalculationEntity{
     private ContractEntity contract;
     @Min(0)
     private Integer daysDelayed;
-    @BigDecimal
+    
     private BigDecimal calculatedPenalty;
     @ManyToOne
     private BreachRuleEntity appliedRule;
@@ -65,7 +65,7 @@ public class PenaltyCalculationEntity{
     }
 
     public PenaltyCalculationEntity(Long id, ContractEntity contract,Integer daysDelayed,
-    BigDecimal calculatedPenalty,BreachRule appliedRule,
+    BigDecimal calculatedPenalty,BreachRuleEntity appliedRule,
     LocalDateTime createdAt){
 
         this.id=id;
