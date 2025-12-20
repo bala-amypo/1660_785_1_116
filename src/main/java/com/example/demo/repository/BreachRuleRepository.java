@@ -6,5 +6,5 @@ import com.example.demo.entity.BreachRuleEntity;
 
 @Repository
 public interface BreachRuleRepository extends JpaRepository<BreachRuleEntity,Long>{
-    
+    BreachRuleEntity findFirstByActiveTrueOrderByIsDefaultRuleDesc();
 }

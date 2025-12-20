@@ -6,7 +6,8 @@ import com.example.demo.entity.PenaltyCalculationEntity;
 
 @Repository
 public interface PenaltyCalculationRepository extends JpaRepository<PenaltyCalculationEntity,Long>{
-    
+    List<PenaltyCalculationEntity> findByContractId(Long contractId); 
+    PenaltyCalculationEntity findTopByContractIdOrderByCalculatedAtDesc(Long contractId);  
 }
 
 

@@ -7,5 +7,9 @@ import com.example.demo.entity.DeliveryRecordEntity;
 
 @Repository
 public interface DeliveryRecordRepository extends JpaRepository<DeliveryRecordEntity,Long>{
-    
+    List<DeliveryRecordEntity>
+    findByContractIdOrderByDeliveryDateAsc(Long contractId);  
+
+    DeliveryRecordEntity
+    findFirstByContractIdOrderByDeliveryDateDesc(Long contractId);
 }
