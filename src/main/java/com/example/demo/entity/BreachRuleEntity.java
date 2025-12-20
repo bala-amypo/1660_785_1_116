@@ -5,8 +5,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Max;
 
 import java.math.BigDecimal;
 
@@ -16,24 +14,20 @@ public class BreachRuleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
-    private String ruleName;
-    
-    private BigDecimal penaltyPerDay;
-    @Min(0)
-    @Max(100)
-    private Double maxPenaltyPercentage;
 
+    @Column(unique = true)
+    private String ruleName;
+
+    private BigDecimal penaltyPerDay;
+    private Double maxPenaltyPercentage;
     private Boolean active;
     private Boolean isDefaultRule;
 
+    public BreachRuleEntity() {
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getRuleName() {
@@ -74,19 +68,5 @@ public class BreachRuleEntity {
 
     public void setIsDefaultRule(Boolean isDefaultRule) {
         this.isDefaultRule = isDefaultRule;
-    }
-
-    public BreachRuleEntity(Long id, String ruleName, BigDecimal penaltyPerDay,
-            Double maxPenaltyPercentage, Boolean active, Boolean isDefaultRule) {
-
-        this.id = id;
-        this.ruleName = ruleName;
-        this.penaltyPerDay = penaltyPerDay;
-        this.maxPenaltyPercentage = maxPenaltyPercentage;
-        this.active = active;
-        this.isDefaultRule = isDefaultRule;
-    }
-
-    public BreachRuleEntity() {
     }
 }
