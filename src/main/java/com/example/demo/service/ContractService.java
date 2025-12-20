@@ -12,4 +12,7 @@ public interface ContractService {
     ContractEntity getContractById(Long id);
 
     List<ContractEntity> getAllContracts();
+    
+    void updateContractStatus(Long id);
+
 }
