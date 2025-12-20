@@ -23,11 +23,17 @@ public class DeliveryRecordController {
         this.deliveryService = deliveryService;
     }
 
+    // @PostMapping
+    // public DeliveryRecordEntity create(
+    //         @RequestBody DeliveryRecordEntity record) {
+    //     return deliveryService.createDeliveryRecord(record);
+    // }
     @PostMapping
-    public DeliveryRecordEntity create(
+    public ResponseEntity<DeliveryRecordEntity> create(
             @RequestBody DeliveryRecordEntity record) {
-        return deliveryService.createDeliveryRecord(record);
+        return ResponseEntity.ok(deliveryService.createDeliveryRecord(record));
     }
+
 
     @GetMapping("/{id}")
     public DeliveryRecordEntity getById(@PathVariable Long id) {
