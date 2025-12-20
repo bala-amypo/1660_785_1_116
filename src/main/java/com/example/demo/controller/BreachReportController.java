@@ -20,8 +20,6 @@ public class BreachReportController {
     public BreachReportController(BreachReportService reportService) {
         this.reportService = reportService;
     }
-
-    // Generate report for a contract
     @PostMapping("/contract/{contractId}")
     public BreachReportEntity generateReport(
             @PathVariable Long contractId) {
