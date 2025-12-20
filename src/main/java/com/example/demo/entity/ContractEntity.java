@@ -22,7 +22,8 @@ public class ContractEntity{
     @min(0)
     @DecimalMin
     private BigDecimal baseContractValue;
-     private String status; ---
+    @Enumerated
+     private ContractStatus status; 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
