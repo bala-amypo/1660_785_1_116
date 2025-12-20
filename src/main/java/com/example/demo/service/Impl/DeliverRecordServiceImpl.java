@@ -9,8 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class DeliveryRecordServiceImpl
-        implements DeliveryRecordService {
+public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 
     private DeliveryRecordRepository deliveryRepo;
     private ContractRepository contractRepo;
