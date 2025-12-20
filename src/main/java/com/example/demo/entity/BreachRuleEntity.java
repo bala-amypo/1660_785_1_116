@@ -16,7 +16,7 @@ public class BreachRuleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(unique=true)
     private String ruleName;
     private BigDecimal penaltyPerDay;
     @Min(0)

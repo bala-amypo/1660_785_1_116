@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Present;
 import jakarta.persistence.Past;
-import jakarta.persistence.Many;
+import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
