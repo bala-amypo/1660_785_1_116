@@ -97,10 +97,10 @@ public class ContractEntity {
         return updatedAt;
     }
 
-    public Contract() {
+    public ContractEntity() {
     }
 
-    public Contract(String contractNumber, String title,
+    public ContractEntity(String contractNumber, String title,
                     String counterpartyName, LocalDate agreedDeliveryDate,
                     BigDecimal baseContractValue) {
         this.contractNumber = contractNumber;
