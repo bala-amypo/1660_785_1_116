@@ -30,11 +30,11 @@ public class DeliveryRecord {
         return id;
     }
 
-    public ContractEntity getContract() {
+    public Contract getContract() {
         return contract;
     }
 
-    public void setContract(ContractEntity contract) {
+    public void setContract(Contract contract) {
         this.contract = contract;
     }
 
