@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.BreachReportEntity;
+import com.example.demo.entity.BreachReport;
 import com.example.demo.service.BreachReportService;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -21,26 +21,26 @@ public class BreachReportController {
         this.reportService = reportService;
     }
     @PostMapping("/contract/{contractId}")
-    public BreachReportEntity generateReport(
+    public BreachReport generateReport(
             @PathVariable Long contractId) {
         return reportService.generateReport(contractId);
     }
 
     @GetMapping("/{id}")
-    public BreachReportEntity getReportById(
+    public BreachReport getReportById(
             @PathVariable Long id) {
         return reportService.getReportById(id);
     }
 
     
     @GetMapping("/contract/{contractId}")
-    public List<BreachReportEntity> getReportsByContract(
+    public List<BreachReport> getReportsByContract(
             @PathVariable Long contractId) {
         return reportService.getReportsForContract(contractId);
     }
 
     @GetMapping
-    public List<BreachReportEntity> getAllReports() {
+    public List<BreachReport> getAllReports() {
         return reportService.getAllReports();
     }
 }

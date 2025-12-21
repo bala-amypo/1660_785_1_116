@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.BreachRuleEntity;
+import com.example.demo.entity.BreachRule;
 import com.example.demo.service.BreachRuleService;
 
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class BreachRuleController {
     }
 
     @PostMapping
-    public BreachRuleEntity create(@RequestBody BreachRuleEntity rule) {
+    public BreachRule create(@RequestBody BreachRuleEntity rule) {
         return ruleService.createRule(rule);
     }
 
