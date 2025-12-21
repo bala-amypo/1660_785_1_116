@@ -2,9 +2,9 @@ package com.example.demo.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.entity.BreachRuleEntity;
+import com.example.demo.entity.BreachRule;
 
 @Repository
-public interface BreachRuleRepository extends JpaRepository<BreachRuleEntity,Long>{
-    BreachRuleEntity findFirstByActiveTrueOrderByIsDefaultRuleDesc();
+public interface BreachRuleRepository extends JpaRepository<BreachRule,Long>{
+    BreachRule findFirstByActiveTrueOrderByIsDefaultRuleDesc();
 }
