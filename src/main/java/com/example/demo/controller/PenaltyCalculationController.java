@@ -24,8 +24,8 @@ public class PenaltyCalculationController {
 
     @PostMapping
     public PenaltyCalculation create(@RequestBody PenaltyCalculation p) {
-    return penaltyService.save(p);
-}
+        return penaltyService.save(p);
+    }
 
 
     @GetMapping("/{id}")
