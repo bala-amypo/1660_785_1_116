@@ -18,23 +18,23 @@ public class BreachRuleController {
     }
 
     @PostMapping
-    public BreachRule create(@RequestBody BreachRuleEntity rule) {
+    public BreachRule create(@RequestBody BreachRule rule) {
         return ruleService.createRule(rule);
     }
 
     @PutMapping("/{id}")
-    public BreachRuleEntity update(@PathVariable Long id,
-                                   @RequestBody BreachRuleEntity rule) {
+    public BreachRule update(@PathVariable Long id,
+                                   @RequestBody BreachRule rule) {
         return ruleService.updateRule(id, rule);
     }
 
     @GetMapping("/{id}")
-    public BreachRuleEntity get(@PathVariable Long id) {
+    public BreachRule get(@PathVariable Long id) {
         return ruleService.getRuleById(id);
     }
 
     @GetMapping
-    public List<BreachRuleEntity> getAll() {
+    public List<BreachRule> getAll() {
         return ruleService.getAllRules();
     }
 

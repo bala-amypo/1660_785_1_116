@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.ContractEntity;
+import com.example.demo.entity.Contract;
 import com.example.demo.service.ContractService;
 
 import java.util.List;
@@ -25,26 +25,26 @@ public class ContractController {
     }
 
     @PostMapping
-    public ContractEntity createContract(
-            @RequestBody ContractEntity contract) {
+    public Contract createContract(
+            @RequestBody Contract contract) {
         return contractService.createContract(contract);
     }
 
     @PutMapping("/{id}")
-    public ContractEntity updateContract(
+    public Contract updateContract(
             @PathVariable Long id,
-            @RequestBody ContractEntity contract) {
+            @RequestBody Contract contract) {
         return contractService.updateContract(id, contract);
     }
 
     @GetMapping("/{id}")
-    public ContractEntity getContractById(
+    public Contract getContractById(
             @PathVariable Long id) {
         return contractService.getContractById(id);
     }
 
     @GetMapping
-    public List<ContractEntity> getAllContracts() {
+    public List<Contract> getAllContracts() {
         return contractService.getAllContracts();
     }
 

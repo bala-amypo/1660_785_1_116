@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.DeliveryRecordEntity;
+import com.example.demo.entity.DeliveryRecord;
 import com.example.demo.service.DeliveryRecordService;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -24,25 +24,25 @@ public class DeliveryRecordController {
     }
 
     @PostMapping
-    public ResponseEntity<DeliveryRecordEntity> create(
-            @RequestBody DeliveryRecordEntity record) {
+    public Response<DeliveryRecord> create(
+            @RequestBody DeliveryRecord record) {
         return ResponseEntity.ok(
                 deliveryService.createDeliveryRecord(record));
     }
 
     @GetMapping("/{id}")
-    public DeliveryRecordEntity getById(@PathVariable Long id) {
+    public DeliveryRecord getById(@PathVariable Long id) {
         return deliveryService.getRecordById(id);
     }
 
     @GetMapping("/contract/{contractId}")
-    public List<DeliveryRecordEntity> getByContract(
+    public List<DeliveryRecord> getByContract(
             @PathVariable Long contractId) {
         return deliveryService.getDeliveryRecordsForContract(contractId);
     }
 
     @GetMapping("/contract/{contractId}/latest")
-    public DeliveryRecordEntity getLatest(
+    public DeliveryRecord getLatest(
             @PathVariable Long contractId) {
         return deliveryService.getLatestDeliveryRecord(contractId);
     }
