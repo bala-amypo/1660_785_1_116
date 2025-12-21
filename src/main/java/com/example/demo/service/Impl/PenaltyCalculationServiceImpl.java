@@ -31,44 +31,34 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
     }
 
     @Override
+    public PenaltyCalculation save(PenaltyCalculation p) {
+        return penaltyRepo.save(p);
+    }
+
+    @Override
     public PenaltyCalculation calculatePenalty(Long contractId) {
+        Contract contract = contractRepo.findById(contractId).orElse(null);
+        if (contract == null) return null;
 
-        Contract contract =
-                contractRepo.findById(contractId).orElse(null);
-        if (contract == null) {
-            return null;
-        }
+        BreachRule rule = ruleRepo.findFirstByActiveTrueOrderByIsDefaultRuleDesc();
 
-        BreachRule rule =
-                ruleRepo.findFirstByActiveTrueOrderByIsDefaultRuleDesc();
-
-        long days =
-                LocalDate.now().toEpochDay()
-                        - contract.getAgreedDeliveryDate().toEpochDay();
-
-        if (days < 0) {
-            days = 0;
-        }
+        long days = LocalDate.now().toEpochDay()
+                - contract.getAgreedDeliveryDate().toEpochDay();
+        if (days < 0) days = 0;
 
         BigDecimal penalty =
-                rule.getPenaltyPerDay()
-                        .multiply(BigDecimal.valueOf(days));
+                rule.getPenaltyPerDay().multiply(BigDecimal.valueOf(days));
 
         BigDecimal maxPenalty =
                 contract.getBaseContractValue()
-                        .multiply(BigDecimal.valueOf(
-                                rule.getMaxPenaltyPercentage() / 100));
+                        .multiply(BigDecimal.valueOf(rule.getMaxPenaltyPercentage() / 100));
 
-        if (penalty.compareTo(maxPenalty) > 0) {
-            penalty = maxPenalty;
-        }
+        if (penalty.compareTo(maxPenalty) > 0) penalty = maxPenalty;
 
         PenaltyCalculation calc = new PenaltyCalculation();
         calc.setContract(contract);
-        calc.setBreachRule(rule);
         calc.setDaysDelayed((int) days);
         calc.setCalculatedPenalty(penalty);
-        calc.setCalculatedAt(LocalDateTime.now());
 
         return penaltyRepo.save(calc);
     }
@@ -83,3 +73,4 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
         return penaltyRepo.findByContractId(contractId);
     }
 }
+
