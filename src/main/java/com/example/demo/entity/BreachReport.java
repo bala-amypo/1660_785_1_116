@@ -17,14 +17,14 @@ public class BreachReport {
     private Long id;
 
     @ManyToOne
-    private ContractEntity contract;
+    private Contract contract;
 
     private Integer daysDelayed;
     private BigDecimal penaltyAmount;
     private String reportStatus;
     private LocalDateTime generatedAt;
 
-    public BreachReportEntity() {
+    public BreachReport() {
     }
 
     public Long getId() {
