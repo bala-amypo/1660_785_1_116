@@ -23,20 +23,20 @@ public class PenaltyCalculationController {
     }
 
     @PostMapping("/contract/{contractId}")
-    public PenaltyCalculationEntity calculatePenalty(
+    public PenaltyCalculation calculatePenalty(
             @PathVariable Long contractId) {
         return penaltyService.calculatePenalty(contractId);
     }
 
     @GetMapping("/{id}")
-    public PenaltyCalculationEntity getById(
+    public PenaltyCalculation getById(
             @PathVariable Long id) {
         return penaltyService.getCalculationById(id);
     }
 
    
     @GetMapping("/contract/{contractId}")
-    public List<PenaltyCalculationEntity> getByContract(
+    public List<PenaltyCalculation> getByContract(
             @PathVariable Long contractId) {
         return penaltyService.getCalculationsForContract(contractId);
     }
