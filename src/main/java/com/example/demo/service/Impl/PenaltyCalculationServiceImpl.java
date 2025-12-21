@@ -31,12 +31,17 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
     }
 
     @Override
-        public PenaltyCalculation save(PenaltyCalculation p) {
+    public PenaltyCalculation save(PenaltyCalculation p) {
         p.setCalculatedAt(LocalDateTime.now());
-        BreachRule rule = ruleRepo.findFirstByActiveTrueOrderByIsDefaultRuleDesc();
+        BreachRule rule =
+            ruleRepo.findFirstByActiveTrueOrderByIsDefaultRuleDesc();
+        if (rule == null) {
+            throw new RuntimeException("No active breach rule found");
+        }
         p.setBreachRule(rule);
         return penaltyRepo.save(p);
-    }
+        }
+
 
     
     @Override
