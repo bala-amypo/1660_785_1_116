@@ -32,12 +32,12 @@ public class BreachReportServiceImpl
     }
 
     @Override
-    public BreachReportEntity generateReport(Long contractId) {
+    public BreachReport generateReport(Long contractId) {
 
-        ContractEntity contract =
+        Contract contract =
                 contractRepo.findById(contractId).orElse(null);
 
-        PenaltyCalculationEntity calc =
+        PenaltyCalculation calc =
                 penaltyRepo
                         .findTopByContractIdOrderByCalculatedAtDesc(contractId);
 
@@ -45,8 +45,8 @@ public class BreachReportServiceImpl
             return null;
         }
 
-        BreachReportEntity report =
-                new BreachReportEntity();
+        BreachReport report =
+                new BreachReport();
 
         report.setContract(contract);
         report.setDaysDelayed(calc.getDaysDelayed());
@@ -58,18 +58,18 @@ public class BreachReportServiceImpl
     }
 
     @Override
-    public BreachReportEntity getReportById(Long id) {
+    public BreachReport getReportById(Long id) {
         return reportRepo.findById(id).orElse(null);
     }
 
     @Override
-    public List<BreachReportEntity>
+    public List<BreachReport>
     getReportsForContract(Long contractId) {
         return reportRepo.findByContractId(contractId);
     }
 
     @Override
-    public List<BreachReportEntity> getAllReports() {
+    public List<BreachReport> getAllReports() {
         return reportRepo.findAll();
 }
 
