@@ -1,19 +1,17 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.ContractEntity;
-import com.example.demo.entity.DeliveryRecordEntity;
+import com.example.demo.entity.Contract;
+import com.example.demo.entity.DeliveryRecord;
 import com.example.demo.repository.ContractRepository;
 import com.example.demo.repository.DeliveryRecordRepository;
 import com.example.demo.service.DeliveryRecordService;
 
-import org.springframework.stereotype.Service;   
-
+import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Service 
-public class DeliveryRecordServiceImpl
-        implements DeliveryRecordService {
+@Service
+public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 
     private DeliveryRecordRepository deliveryRepo;
     private ContractRepository contractRepo;
@@ -26,36 +24,29 @@ public class DeliveryRecordServiceImpl
     }
 
     @Override
-    public DeliveryRecordEntity createDeliveryRecord(
-            DeliveryRecordEntity record) {
+    public DeliveryRecord createDeliveryRecord(DeliveryRecord record) {
 
-        ContractEntity contract =
-                contractRepo.findById(
-                        record.getContract().getId())
-                        .orElseThrow(() ->
-                                new RuntimeException("Contract not found"));
+        Contract contract =
+                contractRepo.findById(record.getContract().getId())
+                        .orElseThrow(() -> new RuntimeException("Contract not found"));
 
         record.setContract(contract);
         record.setCreatedAt(LocalDateTime.now());
-
-        return deliveryRepo.save(record);   
+        return deliveryRepo.save(record);
     }
 
     @Override
-    public DeliveryRecordEntity getRecordById(Long id) {
+    public DeliveryRecord getRecordById(Long id) {
         return deliveryRepo.findById(id).orElse(null);
     }
 
     @Override
-    public List<DeliveryRecordEntity>
-    getDeliveryRecordsForContract(Long contractId) {
-        return deliveryRepo
-                .findByContractIdOrderByDeliveryDateAsc(contractId);
+    public List<DeliveryRecord> getDeliveryRecordsForContract(Long contractId) {
+        return deliveryRepo.findByContractIdOrderByDeliveryDateAsc(contractId);
     }
 
     @Override
-    public DeliveryRecordEntity getLatestDeliveryRecord(Long contractId) {
-        return deliveryRepo
-                .findFirstByContractIdOrderByDeliveryDateDesc(contractId);
+    public DeliveryRecord getLatestDeliveryRecord(Long contractId) {
+        return deliveryRepo.findFirstByContractIdOrderByDeliveryDateDesc(contractId);
     }
 }

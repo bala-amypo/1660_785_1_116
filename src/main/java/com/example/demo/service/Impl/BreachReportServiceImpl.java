@@ -3,11 +3,9 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Contract;
 import com.example.demo.entity.PenaltyCalculation;
 import com.example.demo.entity.BreachReport;
-
 import com.example.demo.repository.ContractRepository;
 import com.example.demo.repository.PenaltyCalculationRepository;
 import com.example.demo.repository.BreachReportRepository;
-
 import com.example.demo.service.BreachReportService;
 
 import java.time.LocalDateTime;
@@ -15,8 +13,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BreachReportServiceImpl
-        implements BreachReportService {
+public class BreachReportServiceImpl implements BreachReportService {
 
     private BreachReportRepository reportRepo;
     private PenaltyCalculationRepository penaltyRepo;
@@ -38,16 +35,13 @@ public class BreachReportServiceImpl
                 contractRepo.findById(contractId).orElse(null);
 
         PenaltyCalculation calc =
-                penaltyRepo
-                        .findTopByContractIdOrderByCalculatedAtDesc(contractId);
+                penaltyRepo.findTopByContractIdOrderByCalculatedAtDesc(contractId);
 
         if (contract == null || calc == null) {
             return null;
         }
 
-        BreachReport report =
-                new BreachReport();
-
+        BreachReport report = new BreachReport();
         report.setContract(contract);
         report.setDaysDelayed(calc.getDaysDelayed());
         report.setPenaltyAmount(calc.getCalculatedPenalty());
@@ -63,14 +57,12 @@ public class BreachReportServiceImpl
     }
 
     @Override
-    public List<BreachReport>
-    getReportsForContract(Long contractId) {
+    public List<BreachReport> getReportsForContract(Long contractId) {
         return reportRepo.findByContractId(contractId);
     }
 
     @Override
     public List<BreachReport> getAllReports() {
         return reportRepo.findAll();
-}
-
+    }
 }

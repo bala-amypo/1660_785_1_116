@@ -1,11 +1,12 @@
 package com.example.demo.service.impl;
 
 import org.springframework.stereotype.Service;
-import com.example.demo.entity.BreachRuleEntity;
+import com.example.demo.entity.BreachRule;
 import com.example.demo.repository.BreachRuleRepository;
 import com.example.demo.service.BreachRuleService;
 
 import java.util.List;
+
 @Service
 public class BreachRuleServiceImpl implements BreachRuleService {
 
@@ -16,14 +17,14 @@ public class BreachRuleServiceImpl implements BreachRuleService {
     }
 
     @Override
-    public BreachRuleEntity createRule(BreachRuleEntity rule) {
+    public BreachRule createRule(BreachRule rule) {
         rule.setActive(true);
         return ruleRepo.save(rule);
     }
 
     @Override
-    public BreachRuleEntity updateRule(Long id, BreachRuleEntity rule) {
-        BreachRuleEntity existing = ruleRepo.findById(id).orElse(null);
+    public BreachRule updateRule(Long id, BreachRule rule) {
+        BreachRule existing = ruleRepo.findById(id).orElse(null);
         if (existing != null) {
             existing.setPenaltyPerDay(rule.getPenaltyPerDay());
             existing.setMaxPenaltyPercentage(rule.getMaxPenaltyPercentage());
@@ -33,18 +34,18 @@ public class BreachRuleServiceImpl implements BreachRuleService {
     }
 
     @Override
-    public BreachRuleEntity getRuleById(Long id) {
+    public BreachRule getRuleById(Long id) {
         return ruleRepo.findById(id).orElse(null);
     }
 
     @Override
-    public List<BreachRuleEntity> getAllRules() {
+    public List<BreachRule> getAllRules() {
         return ruleRepo.findAll();
     }
 
     @Override
     public void deactivateRule(Long id) {
-        BreachRuleEntity rule = ruleRepo.findById(id).orElse(null);
+        BreachRule rule = ruleRepo.findById(id).orElse(null);
         if (rule != null) {
             rule.setActive(false);
             ruleRepo.save(rule);
@@ -52,7 +53,7 @@ public class BreachRuleServiceImpl implements BreachRuleService {
     }
 
     @Override
-    public BreachRuleEntity getActiveDefaultOrFirst() {
+    public BreachRule getActiveDefaultOrFirst() {
         return ruleRepo.findFirstByActiveTrueOrderByIsDefaultRuleDesc();
     }
 }

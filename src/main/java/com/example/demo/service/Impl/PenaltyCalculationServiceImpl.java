@@ -1,14 +1,12 @@
 package com.example.demo.service.impl;
 
 import org.springframework.stereotype.Service;
-import com.example.demo.entity.ContractEntity;
-import com.example.demo.entity.BreachRuleEntity;
-import com.example.demo.entity.PenaltyCalculationEntity;
-
+import com.example.demo.entity.Contract;
+import com.example.demo.entity.BreachRule;
+import com.example.demo.entity.PenaltyCalculation;
 import com.example.demo.repository.ContractRepository;
 import com.example.demo.repository.BreachRuleRepository;
 import com.example.demo.repository.PenaltyCalculationRepository;
-
 import com.example.demo.service.PenaltyCalculationService;
 
 import java.math.BigDecimal;
@@ -17,8 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class PenaltyCalculationServiceImpl
-        implements PenaltyCalculationService {
+public class PenaltyCalculationServiceImpl implements PenaltyCalculationService {
 
     private PenaltyCalculationRepository penaltyRepo;
     private ContractRepository contractRepo;
@@ -34,16 +31,15 @@ public class PenaltyCalculationServiceImpl
     }
 
     @Override
-    public PenaltyCalculationEntity calculatePenalty(Long contractId) {
+    public PenaltyCalculation calculatePenalty(Long contractId) {
 
-        ContractEntity contract =
+        Contract contract =
                 contractRepo.findById(contractId).orElse(null);
-
         if (contract == null) {
             return null;
         }
 
-        BreachRuleEntity rule =
+        BreachRule rule =
                 ruleRepo.findFirstByActiveTrueOrderByIsDefaultRuleDesc();
 
         long days =
@@ -67,9 +63,7 @@ public class PenaltyCalculationServiceImpl
             penalty = maxPenalty;
         }
 
-        PenaltyCalculationEntity calc =
-                new PenaltyCalculationEntity();
-
+        PenaltyCalculation calc = new PenaltyCalculation();
         calc.setContract(contract);
         calc.setBreachRule(rule);
         calc.setDaysDelayed((int) days);
@@ -80,13 +74,12 @@ public class PenaltyCalculationServiceImpl
     }
 
     @Override
-    public PenaltyCalculationEntity getCalculationById(Long id) {
+    public PenaltyCalculation getCalculationById(Long id) {
         return penaltyRepo.findById(id).orElse(null);
     }
 
     @Override
-    public List<PenaltyCalculationEntity>
-    getCalculationsForContract(Long contractId) {
+    public List<PenaltyCalculation> getCalculationsForContract(Long contractId) {
         return penaltyRepo.findByContractId(contractId);
     }
 }
