@@ -31,10 +31,14 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
     }
 
     @Override
-    public PenaltyCalculation save(PenaltyCalculation p) {
+        public PenaltyCalculation save(PenaltyCalculation p) {
+        p.setCalculatedAt(LocalDateTime.now());
+        BreachRule rule = ruleRepo.findFirstByActiveTrueOrderByIsDefaultRuleDesc();
+        p.setBreachRule(rule);
         return penaltyRepo.save(p);
     }
 
+    
     @Override
     public PenaltyCalculation calculatePenalty(Long contractId) {
         Contract contract = contractRepo.findById(contractId).orElse(null);
