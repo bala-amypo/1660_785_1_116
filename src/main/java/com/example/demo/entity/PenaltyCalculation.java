@@ -10,42 +10,42 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-public class PenaltyCalculationEntity {
+public class PenaltyCalculation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private ContractEntity contract;
+    private Contract contract;
 
     @ManyToOne
-    private BreachRuleEntity breachRule;
+    private BreachRule breachRule;
 
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
     private LocalDateTime calculatedAt;
 
-    public PenaltyCalculationEntity() {
+    public PenaltyCalculation() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public ContractEntity getContract() {
+    public Contract getContract() {
         return contract;
     }
 
-    public void setContract(ContractEntity contract) {
+    public void setContract(Contract contract) {
         this.contract = contract;
     }
 
-    public BreachRuleEntity getBreachRule() {
+    public BreachRule getBreachRule() {
         return breachRule;
     }
 
-    public void setBreachRule(BreachRuleEntity breachRule) {
+    public void setBreachRule(BreachRule breachRule) {
         this.breachRule = breachRule;
     }
 

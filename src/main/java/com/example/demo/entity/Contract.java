@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-public class ContractEntity {
+public class Contract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,10 +102,10 @@ public class ContractEntity {
         return updatedAt;
     }
 
-    public ContractEntity() {
+    public Contract() {
     }
 
-    public ContractEntity(String contractNumber, String title,
+    public Contract(String contractNumber, String title,
                     String counterpartyName, LocalDate agreedDeliveryDate,
                     BigDecimal baseContractValue) {
         this.contractNumber = contractNumber;

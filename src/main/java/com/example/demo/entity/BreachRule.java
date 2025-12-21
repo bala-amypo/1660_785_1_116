@@ -9,7 +9,7 @@ import jakarta.persistence.Column;
 import java.math.BigDecimal;
 
 @Entity
-public class BreachRuleEntity {
+public class BreachRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class BreachRuleEntity {
     private Boolean active;
     private Boolean isDefaultRule;
 
-    public BreachRuleEntity() {
+    public BreachRule() {
     }
 
     public Long getId() {

@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 
 @Entity
-public class UserEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class UserEntity {
     private String role;
     private Boolean active;
 
-    public UserEntity() {
+    public User() {
     }
 
     public Long getId() {

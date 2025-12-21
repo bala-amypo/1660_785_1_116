@@ -10,20 +10,20 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-public class DeliveryRecordEntity {
+public class DeliveryRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private ContractEntity contract;
+    private Contract contract;
 
     private LocalDate deliveryDate;
     private String notes;
     private LocalDateTime createdAt;
 
-    public DeliveryRecordEntity() {
+    public DeliveryRecord() {
     }
 
     public Long getId() {
