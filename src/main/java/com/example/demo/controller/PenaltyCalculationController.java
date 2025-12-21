@@ -22,11 +22,11 @@ public class PenaltyCalculationController {
         this.penaltyService = penaltyService;
     }
 
-    @PostMapping("/contract/{contractId}")
-    public PenaltyCalculation calculatePenalty(
-            @PathVariable Long contractId) {
-        return penaltyService.calculatePenalty(contractId);
-    }
+    @PostMapping
+    public PenaltyCalculation create(@RequestBody PenaltyCalculation p) {
+    return penaltyService.save(p);
+}
+
 
     @GetMapping("/{id}")
     public PenaltyCalculation getById(
