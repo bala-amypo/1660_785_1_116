@@ -1,8 +1,8 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.ContractEntity;
-import com.example.demo.entity.PenaltyCalculationEntity;
-import com.example.demo.entity.BreachReportEntity;
+import com.example.demo.entity.Contract;
+import com.example.demo.entity.PenaltyCalculation;
+import com.example.demo.entity.BreachReport;
 
 import com.example.demo.repository.ContractRepository;
 import com.example.demo.repository.PenaltyCalculationRepository;
