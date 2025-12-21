@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.ContractEntity;
+import com.example.demo.entity.Contract;
 import java.util.List;
 
 public interface ContractService {
 
-    ContractEntity createContract(ContractEntity contract);
+    Contract createContract(Contract contract);
 
-    ContractEntity updateContract(Long id, ContractEntity contract);
+    Contract updateContract(Long id, Contract contract);
 
-    ContractEntity getContractById(Long id);
+    Contract getContractById(Long id);
 
-    List<ContractEntity> getAllContracts();
+    List<Contract> getAllContracts();
     
     void updateContractStatus(Long id);
 

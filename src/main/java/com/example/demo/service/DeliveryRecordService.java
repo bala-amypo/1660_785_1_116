@@ -9,7 +9,7 @@ public interface DeliveryRecordService {
 
     DeliveryRecordEntity getRecordById(Long id);
 
-    List<DeliveryRecordEntity> getDeliveryRecordsForContract(Long contractId);
+    List<DeliveryRecord> getDeliveryRecordsForContract(Long contractId);
 
-    DeliveryRecordEntity getLatestDeliveryRecord(Long contractId);
+    DeliveryRecord getLatestDeliveryRecord(Long contractId);
 }
