@@ -28,7 +28,7 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
     @Override
     public DeliveryRecord createDeliveryRecord(DeliveryRecord record) {
 
-        // 🔴 Validate contract existence
+
         Contract contract = contractRepo
                 .findById(record.getContract().getId())
                 .orElseThrow(() ->
