@@ -61,10 +61,11 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
                         .build()
         );
     }
+
     @Override
     public PenaltyCalculation getCalculationById(Long id) {
-        return penaltyRepo.findById(id).orElseThrow(() -> 
-            new ResourceNotFoundException("Calculation not found"));
+        return penaltyRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Calculation not found"));
     }
 
     @Override

@@ -60,16 +60,16 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public void updateContractStatus(Long contractId) {
-    Contract contract = getContractById(contractId);
+        Contract contract = getContractById(contractId);
 
-    deliveryRepo.findFirstByContractIdOrderByDeliveryDateDesc(contractId)
-    .ifPresent(record -> {
-    if (record.getDeliveryDate()
-    .isAfter(contract.getAgreedDeliveryDate())) {
-    contract.setStatus("BREACHED");
-    }
-    });
+        deliveryRepo.findFirstByContractIdOrderByDeliveryDateDesc(contractId)
+                .ifPresent(record -> {
+                    if (record.getDeliveryDate()
+                            .isAfter(contract.getAgreedDeliveryDate())) {
+                        contract.setStatus("BREACHED");
+                    }
+                });
 
-    contractRepo.save(contract);
+        contractRepo.save(contract);
     }
 }
