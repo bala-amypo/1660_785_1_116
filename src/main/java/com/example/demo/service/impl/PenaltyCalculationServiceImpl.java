@@ -64,7 +64,7 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
         .calculatedAt(LocalDateTime.now())
         .build();
 
-
+        return penaltyRepo.save(calculation);  
     }
 
     @Override
