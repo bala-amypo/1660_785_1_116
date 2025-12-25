@@ -45,8 +45,10 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
                 .findFirstByActiveTrueOrderByIsDefaultRuleDesc()
                 .orElseThrow(() -> new ResourceNotFoundException("No active breach rule"));
 
-        long days = Math.max(0,
-                ChronoUnit.DAYS.between(contract.getAgreedDeliveryDate(), record.getDeliveryDate()));
+        int days = (int) Math.max(0,
+        ChronoUnit.DAYS.between(contract.getAgreedDeliveryDate(),
+                                record.getDeliveryDate()));
+
 
         BigDecimal perDay = rule.getPenaltyPerDay().multiply(BigDecimal.valueOf(days));
         BigDecimal maxCap = contract.getBaseContractValue()
