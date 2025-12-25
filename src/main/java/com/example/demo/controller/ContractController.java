@@ -2,55 +2,42 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Contract;
 import com.example.demo.service.ContractService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
 @RestController
-@RequestMapping("/contracts")
+@RequestMapping("/api/contracts")
 public class ContractController {
 
-    private ContractService contractService;
+    private final ContractService service;
 
-    public ContractController(ContractService contractService) {
-        this.contractService = contractService;
+    public ContractController(ContractService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public Contract createContract(
-            @RequestBody Contract contract) {
-        return contractService.createContract(contract);
+    public Contract create(@RequestBody Contract c) {
+        return service.createContract(c);
     }
 
     @PutMapping("/{id}")
-    public Contract updateContract(
-            @PathVariable Long id,
-            @RequestBody Contract contract) {
-        return contractService.updateContract(id, contract);
+    public Contract update(@PathVariable Long id, @RequestBody Contract c) {
+        return service.updateContract(id, c);
     }
 
     @GetMapping("/{id}")
-    public Contract getContractById(
-            @PathVariable Long id) {
-        return contractService.getContractById(id);
+    public Contract get(@PathVariable Long id) {
+        return service.getContractById(id);
     }
 
     @GetMapping
-    public List<Contract> getAllContracts() {
-        return contractService.getAllContracts();
+    public List<Contract> getAll() {
+        return service.getAllContracts();
     }
 
-    @PutMapping("/{id}/status")
-    public void updateContractStatus(@PathVariable Long id) {
-    contractService.updateContractStatus(id);
-}
-
+    @PutMapping("/{id}/update-status")
+    public void updateStatus(@PathVariable Long id) {
+        service.updateContractStatus(id);
+    }
 }

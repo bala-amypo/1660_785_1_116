@@ -2,44 +2,43 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.BreachRule;
 import com.example.demo.service.BreachRuleService;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/breach-rules")
+@RequestMapping("/api/breach-rules")
 public class BreachRuleController {
 
-    private BreachRuleService ruleService;
+    private final BreachRuleService service;
 
-    public BreachRuleController(BreachRuleService ruleService) {
-        this.ruleService = ruleService;
+    public BreachRuleController(BreachRuleService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public BreachRule create(@RequestBody BreachRule rule) {
-        return ruleService.createRule(rule);
+    public BreachRule create(@RequestBody BreachRule r) {
+        return service.createRule(r);
     }
 
     @PutMapping("/{id}")
     public BreachRule update(@PathVariable Long id,
-                                   @RequestBody BreachRule rule) {
-        return ruleService.updateRule(id, rule);
+                             @RequestBody BreachRule r) {
+        return service.updateRule(id, r);
     }
 
     @GetMapping("/{id}")
     public BreachRule get(@PathVariable Long id) {
-        return ruleService.getRuleById(id);
+        return service.getRuleById(id);
     }
 
     @GetMapping
-    public List<BreachRule> getAll() {
-        return ruleService.getAllRules();
+    public List<BreachRule> list() {
+        return service.getAllRules();
     }
 
     @PutMapping("/{id}/deactivate")
     public void deactivate(@PathVariable Long id) {
-        ruleService.deactivateRule(id);
+        service.deactivateRule(id);
     }
 }

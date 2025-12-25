@@ -2,45 +2,37 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.BreachReport;
 import com.example.demo.service.BreachReportService;
-
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/breach-reports")
+@RequestMapping("/api/reports")
 public class BreachReportController {
 
-    private BreachReportService reportService;
+    private final BreachReportService service;
 
-    public BreachReportController(BreachReportService reportService) {
-        this.reportService = reportService;
+    public BreachReportController(BreachReportService service) {
+        this.service = service;
     }
-    @PostMapping("/contract/{contractId}")
-    public BreachReport generateReport(
-            @PathVariable Long contractId) {
-        return reportService.generateReport(contractId);
+
+    @PostMapping("/generate/{contractId}")
+    public BreachReport generate(@PathVariable Long contractId) {
+        return service.generateReport(contractId);
     }
 
     @GetMapping("/{id}")
-    public BreachReport getReportById(
-            @PathVariable Long id) {
-        return reportService.getReportById(id);
+    public BreachReport get(@PathVariable Long id) {
+        return service.getReportById(id);
     }
 
-    
     @GetMapping("/contract/{contractId}")
-    public List<BreachReport> getReportsByContract(
-            @PathVariable Long contractId) {
-        return reportService.getReportsForContract(contractId);
+    public List<BreachReport> listByContract(@PathVariable Long contractId) {
+        return service.getReportsForContract(contractId);
     }
 
     @GetMapping
-    public List<BreachReport> getAllReports() {
-        return reportService.getAllReports();
+    public List<BreachReport> listAll() {
+        return service.getAllReports();
     }
 }
