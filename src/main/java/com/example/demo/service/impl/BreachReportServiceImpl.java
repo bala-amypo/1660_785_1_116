@@ -48,6 +48,7 @@ public class BreachReportServiceImpl implements BreachReportService {
             .generatedAt(LocalDateTime.now())
             .build();
 
+            return reportRepo.save(report);
     }
 
     @Override
