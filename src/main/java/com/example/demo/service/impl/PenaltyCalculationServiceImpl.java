@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.time.LocalDateTime;
+
 
 @Service
 public class PenaltyCalculationServiceImpl implements PenaltyCalculationService {
@@ -55,12 +57,11 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
         PenaltyCalculation calculation = PenaltyCalculation.builder()
         .contract(contract)
         .appliedRule(rule)
-        .daysDelayed(daysDelayed)
-        .calculatedPenalty(finalPenalty)
+        .daysDelayed(days)
+        .calculatedPenalty(penalty)
         .calculatedAt(LocalDateTime.now())
         .build();
 
-            return penaltyRepo.save(calculation);
 
     }
 
