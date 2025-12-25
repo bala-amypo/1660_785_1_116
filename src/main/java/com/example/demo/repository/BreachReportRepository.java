@@ -1,12 +1,15 @@
 package com.example.demo.repository;
 
-
-import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.BreachReport;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
-@Repository
-public interface BreachReportRepository extends JpaRepository<BreachReport,Long>{
+public interface BreachReportRepository extends JpaRepository<BreachReport, Long> {
+
     List<BreachReport> findByContractId(Long contractId);
+    @Query("SELECT b FROM BreachReport b WHERE b.contract.id = :contractId")
+    List<BreachReport> fetchReportsByContractHql(@Param("contractId") Long contractId);
 }
