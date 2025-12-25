@@ -56,5 +56,4 @@ public class User {
                                                                                                                                                                         }
 
                                                                                                                                                                             public void setActive(Boolean active) {
-                                                                                                                                                                                    this.active = active;
-                                                                                                                                                                                        
+                                                                                                                                                                                    this.active
