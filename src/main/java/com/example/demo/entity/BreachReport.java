@@ -25,4 +25,10 @@ public class BreachReport {
     private String remarks;
 
     private LocalDateTime generatedAt = LocalDateTime.now();
+
+    @PrePersist
+    public void onGenerate() {
+        this.generatedAt = LocalDateTime.now();
+}
+
 }

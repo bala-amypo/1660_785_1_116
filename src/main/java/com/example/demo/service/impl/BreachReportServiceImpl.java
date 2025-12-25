@@ -39,13 +39,13 @@ public class BreachReportServiceImpl implements BreachReportService {
                         new ResourceNotFoundException("No penalty calculation"));
 
         BreachReport report = BreachReport.builder()
-                .contract(contract)
-                .daysDelayed(calc.getDaysDelayed())
-                .penaltyAmount(calc.getCalculatedPenalty())
-                .remarks("Generated from latest penalty calculation")
-                .build();
+            .contract(contract)
+            .daysDelayed(calc.getDaysDelayed())
+            .penaltyAmount(calc.getCalculatedPenalty())
+            .remarks("Generated from latest penalty calculation")
+            .generatedAt(LocalDateTime.now())
+            .build();
 
-        return reportRepo.save(report);
     }
 
     @Override
