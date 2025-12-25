@@ -52,14 +52,16 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
 
         BigDecimal penalty = perDay.min(maxCap);
 
-        return penaltyRepo.save(
-                PenaltyCalculation.builder()
-                        .contract(contract)
-                        .appliedRule(rule)
-                        .daysDelayed((int) days)
-                        .calculatedPenalty(penalty)
-                        .build()
-        );
+        PenaltyCalculation calculation = PenaltyCalculation.builder()
+        .contract(contract)
+        .appliedRule(rule)
+        .daysDelayed(daysDelayed)
+        .calculatedPenalty(finalPenalty)
+        .calculatedAt(LocalDateTime.now())
+        .build();
+
+            return penaltyRepo.save(calculation);
+
     }
 
     @Override
