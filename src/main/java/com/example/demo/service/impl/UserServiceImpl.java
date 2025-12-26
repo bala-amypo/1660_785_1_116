@@ -1,34 +1,49 @@
 package com.example.demo.service.impl;
 
-import org.springframework.stereotype.Service;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
-    private UserRepository userRepo;
+    UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepo) {
-        this.userRepo = userRepo;
-    }
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Override
     public User createUser(User user) {
-        user.setActive(true);
-        return userRepo.save(user);
+
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new RuntimeException("email exists");
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            Set<String> roles = new HashSet<>();
+            roles.add("ROLE_USER");
+            user.setRoles(roles);
+        }
+
+        return userRepository.save(user);
     }
 
-    @Override
     public User getUserById(Long id) {
-        return userRepo.findById(id).orElse(null);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
     public List<User> getAllUsers() {
-        return userRepo.findAll();
+        return userRepository.findAll();
     }
 }
