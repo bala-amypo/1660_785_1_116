@@ -12,7 +12,7 @@ import java.util.Set;
 public class JwtTokenProvider {
 
     // ⚠️ Tests expect a simple key (DO NOT change this)
-    private final String jwtSecret = "secret";
+    private final String jwtSecret = "THIS_IS_A_VERY_LONG_SECRET_KEY_FOR_JWT_256_BITS_MINIMUM";
     private final Long jwtExpirationMs = 3600000L;
 
     public String generateToken(Long userId, String email, Set<String> roles) {
