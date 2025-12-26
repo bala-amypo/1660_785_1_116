@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Contract;
-import com.example.demo.service.impl.ContractServiceImpl;
+import com.example.demo.service.ContractService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/contracts")
 public class ContractController {
 
-    private final ContractServiceImpl service;
+    private final ContractService service;
 
-    public ContractController(ContractServiceImpl service) {
+    public ContractController(ContractService service) {
         this.service = service;
     }
 
