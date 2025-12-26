@@ -35,7 +35,7 @@ public class AuthController {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        // ✅ FIXED LINE (THIS WAS THE ERROR)
+        // ✅ Set<String>, not String
         user.setRoles(Set.of("ROLE_USER"));
 
         User saved = userRepository.save(user);
@@ -43,6 +43,8 @@ public class AuthController {
         UserDto dto = new UserDto();
         dto.setId(saved.getId());
         dto.setEmail(saved.getEmail());
+
+        // ✅ Set<String>, not String
         dto.setRoles(saved.getRoles());
 
         return dto;
