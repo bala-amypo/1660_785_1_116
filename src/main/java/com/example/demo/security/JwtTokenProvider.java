@@ -11,7 +11,6 @@ import java.util.Set;
 @Component
 public class JwtTokenProvider {
 
-    // ⚠️ Tests expect a simple key (DO NOT change this)
     private final String jwtSecret = "THIS_IS_A_VERY_LONG_SECRET_KEY_FOR_JWT_256_BITS_MINIMUM";
     private final Long jwtExpirationMs = 3600000L;
 
@@ -21,14 +20,12 @@ public class JwtTokenProvider {
                 .claim("email", email)
                 .claim("roles", String.join(",", roles))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-                // ✅ EXACT format tests expect
                 .signWith(SignatureAlgorithm.HS256, jwtSecret.getBytes())
                 .compact();
     }
 
     public Claims getClaims(String token) {
         return Jwts.parser()
-                // ✅ SAME key format
                 .setSigningKey(jwtSecret.getBytes())
                 .parseClaimsJws(token)
                 .getBody();
