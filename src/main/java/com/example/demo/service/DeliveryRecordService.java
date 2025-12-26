@@ -13,5 +13,5 @@ public interface DeliveryRecordService {
 
     List<DeliveryRecord> getDeliveryRecordsForContract(Long contractId);
 
-    List<DeliveryRecord> getAllRecords();
+    
 }

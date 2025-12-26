@@ -11,12 +11,11 @@ import java.util.Set;
 @Component
 public class JwtTokenProvider {
 
-    // DEFAULT VALUES → tests will override via reflection
-    String jwtSecret = "THIS_IS_A_MINIMUM_256_BIT_LONG_SECRET_KEY_FOR_TESTS";
+    // default values so tests never fail
+    String jwtSecret = "THIS_IS_A_VERY_LONG_SECRET_KEY_FOR_JWT_256_BITS_MINIMUM";
     Long jwtExpirationMs = 3600000L;
 
     public String generateToken(Long userId, String email, Set<String> roles) {
-
         return Jwts.builder()
                 .claim("userId", userId)
                 .claim("email", email)
