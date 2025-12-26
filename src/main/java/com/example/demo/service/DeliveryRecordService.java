@@ -12,4 +12,6 @@ public interface DeliveryRecordService {
     DeliveryRecord getLatestDeliveryRecord(Long contractId);
 
     List<DeliveryRecord> getDeliveryRecordsForContract(Long contractId);
+
+    List<DeliveryRecord> getAllRecords();
 }
