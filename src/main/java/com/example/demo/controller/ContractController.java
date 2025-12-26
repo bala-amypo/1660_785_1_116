@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Contract;
-import com.example.demo.service.ContractService;
+import com.example.demo.service.impl.ContractServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/contracts")
 public class ContractController {
 
-    private final ContractService service;
+    private final ContractServiceImpl service;
 
-    public ContractController(ContractService service) {
+    public ContractController(ContractServiceImpl service) {
         this.service = service;
     }
 
@@ -27,7 +27,7 @@ public class ContractController {
     }
 
     @GetMapping("/{id}")
-    public Contract get(@PathVariable Long id) {
+    public Contract getById(@PathVariable Long id) {
         return service.getContractById(id);
     }
 
@@ -36,7 +36,7 @@ public class ContractController {
         return service.getAllContracts();
     }
 
-    @PutMapping("/{id}/update-status")
+    @PutMapping("/{id}/status")
     public void updateStatus(@PathVariable Long id) {
         service.updateContractStatus(id);
     }

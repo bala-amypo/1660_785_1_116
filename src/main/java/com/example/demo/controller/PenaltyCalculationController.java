@@ -1,22 +1,22 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.PenaltyCalculation;
-import com.example.demo.service.PenaltyCalculationService;
+import com.example.demo.service.impl.PenaltyCalculationServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/penalties")
+@RequestMapping("/api/calculations")
 public class PenaltyCalculationController {
 
-    private final PenaltyCalculationService service;
+    private final PenaltyCalculationServiceImpl service;
 
-    public PenaltyCalculationController(PenaltyCalculationService service) {
+    public PenaltyCalculationController(PenaltyCalculationServiceImpl service) {
         this.service = service;
     }
 
-    @PostMapping("/calculate/{contractId}")
+    @PostMapping("/contract/{contractId}")
     public PenaltyCalculation calculate(@PathVariable Long contractId) {
         return service.calculatePenalty(contractId);
     }
@@ -31,3 +31,4 @@ public class PenaltyCalculationController {
         return service.getCalculationsForContract(contractId);
     }
 }
+

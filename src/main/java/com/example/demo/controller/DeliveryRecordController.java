@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.DeliveryRecord;
-import com.example.demo.service.DeliveryRecordService;
+import com.example.demo.service.impl.DeliveryRecordServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/delivery-records")
 public class DeliveryRecordController {
 
-    private final DeliveryRecordService service;
+    private final DeliveryRecordServiceImpl service;
 
-    public DeliveryRecordController(DeliveryRecordService service) {
+    public DeliveryRecordController(DeliveryRecordServiceImpl service) {
         this.service = service;
     }
 
@@ -27,7 +27,7 @@ public class DeliveryRecordController {
     }
 
     @GetMapping("/contract/{contractId}")
-    public List<DeliveryRecord> list(@PathVariable Long contractId) {
+    public List<DeliveryRecord> getForContract(@PathVariable Long contractId) {
         return service.getDeliveryRecordsForContract(contractId);
     }
 

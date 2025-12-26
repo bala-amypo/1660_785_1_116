@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.BreachRule;
-import com.example.demo.service.BreachRuleService;
+import com.example.demo.service.impl.BreachRuleServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/breach-rules")
 public class BreachRuleController {
 
-    private final BreachRuleService service;
+    private final BreachRuleServiceImpl service;
 
-    public BreachRuleController(BreachRuleService service) {
+    public BreachRuleController(BreachRuleServiceImpl service) {
         this.service = service;
     }
 
@@ -21,19 +21,8 @@ public class BreachRuleController {
         return service.createRule(r);
     }
 
-    @PutMapping("/{id}")
-    public BreachRule update(@PathVariable Long id,
-                             @RequestBody BreachRule r) {
-        return service.updateRule(id, r);
-    }
-
-    @GetMapping("/{id}")
-    public BreachRule get(@PathVariable Long id) {
-        return service.getRuleById(id);
-    }
-
     @GetMapping
-    public List<BreachRule> list() {
+    public List<BreachRule> getAll() {
         return service.getAllRules();
     }
 
