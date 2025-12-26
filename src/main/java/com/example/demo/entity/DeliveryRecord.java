@@ -1,27 +1,26 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class DeliveryRecord {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @ManyToOne
+    @JoinColumn(name = "contract_id")
     private Contract contract;
-
+    
     private LocalDate deliveryDate;
     private String notes;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
 }
