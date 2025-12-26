@@ -9,6 +9,8 @@ import com.example.demo.security.JwtTokenProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -25,13 +27,16 @@ public class AuthController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+ 
     @PostMapping("/register")
     public UserDto register(@RequestBody AuthRequest request) {
 
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRoles(request.getRoles());
+
+        
+        user.setRoles(Set.of("USER"));
 
         User saved = userRepository.save(user);
 
@@ -43,6 +48,7 @@ public class AuthController {
         return dto;
     }
 
+    // LOGIN
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request) {
 
@@ -53,10 +59,13 @@ public class AuthController {
             throw new RuntimeException("Invalid credentials");
         }
 
+       
+        String rolesCsv = String.join(",", user.getRoles());
+
         String token = jwtTokenProvider.generateToken(
                 user.getId(),
                 user.getEmail(),
-                String.join(",", user.getRoles())
+                rolesCsv
         );
 
         return new AuthResponse(token);
