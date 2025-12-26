@@ -22,14 +22,13 @@ public class JwtTokenProvider {
                 .claim("roles", String.join(",", roles))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
                 .signWith(
-                    io.jsonwebtoken.security.Keys.hmacShaKeyFor(jwtSecret.getBytes()),
                     SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
 
     public Claims getClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(io.jsonwebtoken.security.Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
                 .getBody();
     }
