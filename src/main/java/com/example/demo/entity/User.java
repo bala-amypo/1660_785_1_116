@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,6 @@ public class User {
 
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     private Set<String> roles;
 }

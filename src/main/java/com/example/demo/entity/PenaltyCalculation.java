@@ -22,5 +22,10 @@ public class PenaltyCalculation {
 
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
-    private LocalDateTime calculatedAt = LocalDateTime.now();
+    private LocalDateTime calculatedAt;
+
+    @PrePersist
+    void onCalc() {
+        calculatedAt = LocalDateTime.now();
+    }
 }

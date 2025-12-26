@@ -22,5 +22,10 @@ public class BreachReport {
 
     private Integer daysDelayed;
     private BigDecimal penaltyAmount;
-    private LocalDateTime generatedAt = LocalDateTime.now();
+    private LocalDateTime generatedAt;
+
+    @PrePersist
+    void onGen() {
+        generatedAt = LocalDateTime.now();
+    }
 }

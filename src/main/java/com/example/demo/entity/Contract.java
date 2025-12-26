@@ -26,7 +26,10 @@ public class Contract {
     private LocalDate agreedDeliveryDate;
     private BigDecimal baseContractValue;
     private String status = "ACTIVE";
+    private LocalDateTime createdAt;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @PrePersist
+    void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }
-
