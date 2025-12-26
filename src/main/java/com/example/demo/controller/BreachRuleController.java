@@ -16,13 +16,11 @@ public class BreachRuleController {
         this.service = service;
     }
 
-    // POST /api/breach-rules
     @PostMapping
     public BreachRule createRule(@RequestBody BreachRule rule) {
         return service.createRule(rule);
     }
 
-    // PUT /api/breach-rules/{id}
     @PutMapping("/{id}")
     public BreachRule updateRule(@PathVariable Long id,
                                  @RequestBody BreachRule rule) {
@@ -30,7 +28,6 @@ public class BreachRuleController {
         return service.createRule(rule); // simple update logic
     }
 
-    // GET /api/breach-rules/{id}
     @GetMapping("/{id}")
     public BreachRule getRuleById(@PathVariable Long id) {
         return service.getAllRules()
@@ -40,13 +37,11 @@ public class BreachRuleController {
                 .orElseThrow(() -> new RuntimeException("Rule not found"));
     }
 
-    // GET /api/breach-rules
     @GetMapping
     public List<BreachRule> getAllRules() {
         return service.getAllRules();
     }
 
-    // PUT /api/breach-rules/{id}/deactivate
     @PutMapping("/{id}/deactivate")
     public void deactivateRule(@PathVariable Long id) {
         service.deactivateRule(id);

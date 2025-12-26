@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/breach-reports")
+@RequestMapping("/api/reports")
 public class BreachReportController {
 
     private final BreachReportServiceImpl service;
@@ -16,18 +16,27 @@ public class BreachReportController {
         this.service = service;
     }
 
-    @PostMapping("/contract/{contractId}")
-    public BreachReport generate(@PathVariable Long contractId) {
+    @PostMapping("/generate/{contractId}")
+    public BreachReport generateReport(@PathVariable Long contractId) {
         return service.generateReport(contractId);
     }
 
+    @GetMapping("/{id}")
+    public BreachReport getReportById(@PathVariable Long id) {
+        return service.getAllReports()
+                .stream()
+                .filter(r -> r.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Report not found"));
+    }
+
     @GetMapping("/contract/{contractId}")
-    public List<BreachReport> list(@PathVariable Long contractId) {
+    public List<BreachReport> getReportsByContract(@PathVariable Long contractId) {
         return service.getReportsForContract(contractId);
     }
 
     @GetMapping
-    public List<BreachReport> getAll() {
+    public List<BreachReport> getAllReports() {
         return service.getAllReports();
     }
 }
