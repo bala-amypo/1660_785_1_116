@@ -1,28 +1,26 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PenaltyCalculation {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
-    
+
     @ManyToOne
-    @JoinColumn(name = "contract_id")
     private Contract contract;
-    
+
     private Integer daysDelayed;
     private BigDecimal calculatedPenalty;
-    private LocalDateTime calculatedAt;
+    private LocalDateTime calculatedAt = LocalDateTime.now();
 }
