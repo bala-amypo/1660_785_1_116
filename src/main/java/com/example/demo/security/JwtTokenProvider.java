@@ -11,10 +11,12 @@ import java.util.Set;
 @Component
 public class JwtTokenProvider {
 
-    String jwtSecret;
-    Long jwtExpirationMs;
+    // 🔥 MUST HAVE DEFAULT VALUES
+    private String jwtSecret = "my-super-secret-key-my-super-secret-key";
+    private Long jwtExpirationMs = 3600000L; // 1 hour
 
     public String generateToken(Long userId, String email, Set<String> roles) {
+
         return Jwts.builder()
                 .claim("userId", userId)
                 .claim("email", email)

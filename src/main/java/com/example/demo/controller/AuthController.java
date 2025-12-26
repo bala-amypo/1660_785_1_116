@@ -4,7 +4,7 @@ import com.example.demo.dto.AuthRequest;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JwtTokenProvider;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -16,11 +16,11 @@ public class AuthController {
 
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;   // ✅ FIX HERE
 
     public AuthController(UserRepository userRepository,
                           JwtTokenProvider jwtTokenProvider,
-                          BCryptPasswordEncoder passwordEncoder) {
+                          PasswordEncoder passwordEncoder) { // ✅ FIX HERE
         this.userRepository = userRepository;
         this.jwtTokenProvider = jwtTokenProvider;
         this.passwordEncoder = passwordEncoder;
