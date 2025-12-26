@@ -21,13 +21,15 @@ public class JwtTokenProvider {
                 .claim("email", email)
                 .claim("roles", String.join(",", roles))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS256, jwtSecret)
+                .signWith(
+                    io.jsonwebtoken.security.Keys.hmacShaKeyFor(jwtSecret.getBytes()),
+                    SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
 
     public Claims getClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(jwtSecret)
+                .setSigningKey(io.jsonwebtoken.security.Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .parseClaimsJws(token)
                 .getBody();
     }
