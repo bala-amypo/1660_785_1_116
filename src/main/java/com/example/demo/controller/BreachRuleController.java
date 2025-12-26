@@ -16,18 +16,39 @@ public class BreachRuleController {
         this.service = service;
     }
 
+    // POST /api/breach-rules
     @PostMapping
-    public BreachRule create(@RequestBody BreachRule r) {
-        return service.createRule(r);
+    public BreachRule createRule(@RequestBody BreachRule rule) {
+        return service.createRule(rule);
     }
 
+    // PUT /api/breach-rules/{id}
+    @PutMapping("/{id}")
+    public BreachRule updateRule(@PathVariable Long id,
+                                 @RequestBody BreachRule rule) {
+        rule.setId(id);
+        return service.createRule(rule); // simple update logic
+    }
+
+    // GET /api/breach-rules/{id}
+    @GetMapping("/{id}")
+    public BreachRule getRuleById(@PathVariable Long id) {
+        return service.getAllRules()
+                .stream()
+                .filter(r -> r.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Rule not found"));
+    }
+
+    // GET /api/breach-rules
     @GetMapping
-    public List<BreachRule> getAll() {
+    public List<BreachRule> getAllRules() {
         return service.getAllRules();
     }
 
+    // PUT /api/breach-rules/{id}/deactivate
     @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
+    public void deactivateRule(@PathVariable Long id) {
         service.deactivateRule(id);
     }
 }
