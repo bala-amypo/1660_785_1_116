@@ -1,52 +1,48 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
-    // ⚠️ must NOT be private/final (tests & reflection compatibility)
     UserRepository userRepository;
 
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+    @Override
     public User createUser(User user) {
-
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("email exists");
-        }
-
-        // encode password
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        // default role if not provided
-        if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            Set<String> roles = new HashSet<>();
-            roles.add("ROLE_USER");
-            user.setRoles(roles);
-        }
-
         return userRepository.save(user);
     }
 
+    @Override
     public User getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
+    @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDto convertToDto(User user) {
+        return new UserDto(
+                user.getId(),
+                user.getEmail(),
+                user.getRoles().iterator().next(),
+                true
+        );
     }
 }
