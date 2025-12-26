@@ -2,32 +2,51 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    // ⚠️ must NOT be private/final (tests & reflection compatibility)
+    UserRepository userRepository;
 
-    
-    public UserServiceImpl(UserRepository userRepository,
-                           PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Override
-    public User register(User user) {
+    public User createUser(User user) {
+
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new RuntimeException("email exists");
+        }
+
+        // encode password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        // default role if not provided
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            Set<String> roles = new HashSet<>();
+            roles.add("ROLE_USER");
+            user.setRoles(roles);
+        }
+
         return userRepository.save(user);
     }
 
-    @Override
-    public User findByEmail(String email) {
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
