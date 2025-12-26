@@ -1,42 +1,33 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.BreachReport;
-import com.example.demo.service.impl.BreachReportServiceImpl;
+import com.example.demo.service.BreachReportService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reports")
+@RequestMapping("/api/breach-reports")
 public class BreachReportController {
 
-    private final BreachReportServiceImpl service;
+    private final BreachReportService service;
 
-    public BreachReportController(BreachReportServiceImpl service) {
+    public BreachReportController(BreachReportService service) {
         this.service = service;
     }
 
-    @PostMapping("/generate/{contractId}")
-    public BreachReport generateReport(@PathVariable Long contractId) {
-        return service.generateReport(contractId);
+    @PostMapping("/contract/{id}")
+    public BreachReport generate(@PathVariable Long id) {
+        return service.generateReport(id);
     }
 
-    @GetMapping("/{id}")
-    public BreachReport getReportById(@PathVariable Long id) {
-        return service.getAllReports()
-                .stream()
-                .filter(r -> r.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Report not found"));
-    }
-
-    @GetMapping("/contract/{contractId}")
-    public List<BreachReport> getReportsByContract(@PathVariable Long contractId) {
-        return service.getReportsForContract(contractId);
+    @GetMapping("/contract/{id}")
+    public List<BreachReport> byContract(@PathVariable Long id) {
+        return service.getReportsForContract(id);
     }
 
     @GetMapping
-    public List<BreachReport> getAllReports() {
+    public List<BreachReport> getAll() {
         return service.getAllReports();
     }
 }

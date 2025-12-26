@@ -16,17 +16,19 @@ public class AuthController {
 
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public AuthController(UserRepository userRepository,
-                          JwtTokenProvider jwtTokenProvider) {
+                          JwtTokenProvider jwtTokenProvider,
+                          BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.jwtTokenProvider = jwtTokenProvider;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    // ---------------- REGISTER ----------------
+    // ---------- REGISTER ----------
     @PostMapping("/register")
-    public String register(@RequestBody AuthRequest request) {
+    public User register(@RequestBody AuthRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("email exists");
@@ -41,17 +43,15 @@ public class AuthController {
                 .roles(roles)
                 .build();
 
-        userRepository.save(user);
-
-        return "User registered successfully";
+        return userRepository.save(user);
     }
 
-    // ---------------- LOGIN ----------------
+    // ---------- LOGIN ----------
     @PostMapping("/login")
     public String login(@RequestBody AuthRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid credentials");
