@@ -2,7 +2,7 @@ package com.example.demo.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -11,9 +11,9 @@ import java.util.Set;
 @Component
 public class JwtTokenProvider {
 
-    // 🔥 MUST HAVE DEFAULT VALUES
-    private String jwtSecret = "my-super-secret-key-my-super-secret-key";
-    private Long jwtExpirationMs = 3600000L; // 1 hour
+    // DEFAULT VALUES → tests will override via reflection
+    String jwtSecret = "THIS_IS_A_MINIMUM_256_BIT_LONG_SECRET_KEY_FOR_TESTS";
+    Long jwtExpirationMs = 3600000L;
 
     public String generateToken(Long userId, String email, Set<String> roles) {
 
@@ -22,14 +22,13 @@ public class JwtTokenProvider {
                 .claim("email", email)
                 .claim("roles", String.join(",", roles))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-                .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
 
     public Claims getClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(jwtSecret.getBytes())
-                .build()
+        return Jwts.parser()
+                .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
                 .getBody();
     }
