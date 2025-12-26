@@ -27,7 +27,7 @@ public class AuthController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
- 
+    // REGISTER
     @PostMapping("/register")
     public UserDto register(@RequestBody AuthRequest request) {
 
@@ -35,8 +35,8 @@ public class AuthController {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        
-        user.setRoles(Set.of("USER"));
+        // ✅ FIXED LINE (THIS WAS THE ERROR)
+        user.setRoles(Set.of("ROLE_USER"));
 
         User saved = userRepository.save(user);
 
@@ -59,7 +59,6 @@ public class AuthController {
             throw new RuntimeException("Invalid credentials");
         }
 
-       
         String rolesCsv = String.join(",", user.getRoles());
 
         String token = jwtTokenProvider.generateToken(
