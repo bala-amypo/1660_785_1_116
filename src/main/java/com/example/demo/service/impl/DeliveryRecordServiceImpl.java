@@ -18,7 +18,7 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
     @Override
     public DeliveryRecord createDeliveryRecord(DeliveryRecord record) {
         if (record.getDeliveryDate().isAfter(LocalDate.now()))
-            throw new IllegalArgumentException("future");
+            throw new IllegalArgumentException("Delivery date cannot be in the future");
 
         return deliveryRecordRepository.save(record);
     }
