@@ -26,7 +26,7 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // ---------- REGISTER ----------
+    // ================= REGISTER =================
     @PostMapping("/register")
     public User register(@RequestBody AuthRequest request) {
 
@@ -46,7 +46,7 @@ public class AuthController {
         return userRepository.save(user);
     }
 
-    // ---------- LOGIN ----------
+    // ================= LOGIN =================
     @PostMapping("/login")
     public String login(@RequestBody AuthRequest request) {
 
