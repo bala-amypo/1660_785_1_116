@@ -17,9 +17,11 @@ public class BreachReportController {
     }
 
     @PostMapping("/contract/{id}")
-    public BreachReport generate(@PathVariable Long id) {
-        return service.generateReport(id);
-    }
+    // public BreachReport generate(@PathVariable Long id) {
+    //     return service.generateReport(id);
+    // }
+public BreachRule create(@Valid @RequestBody BreachRule rule) {
+    return service.createRule(rule);
 
     @GetMapping("/contract/{id}")
     public List<BreachReport> byContract(@PathVariable Long id) {
@@ -31,3 +33,4 @@ public class BreachReportController {
         return service.getAllReports();
     }
 }
+
