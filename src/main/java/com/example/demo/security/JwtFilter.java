@@ -27,10 +27,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        // IMPORTANT: allow auth & swagger without token
-        if (path.startsWith("/auth")
-                || path.startsWith("/swagger-ui")
-                || path.startsWith("/v3/api-docs")) {
+        if (path.contains("/auth")
+        || path.contains("/swagger-ui")
+        || path.contains("/v3/api-docs") {
 
             filterChain.doFilter(request, response);
             return;
