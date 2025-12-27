@@ -73,7 +73,6 @@ import com.example.demo.security.JwtTokenProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -92,7 +91,6 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // REGISTER
     @PostMapping("/register")
     public User register(@RequestBody AuthRequest request) {
 
@@ -100,19 +98,16 @@ public class AuthController {
             throw new RuntimeException("email exists");
         }
 
-        Set<String> roles = new HashSet<>();
-        roles.add("ROLE_USER");
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        User user = User.builder()
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .roles(roles)
-                .build();
+        // ✅ ONLY place roles is set
+        user.setRoles(Set.of("ROLE_USER"));
 
         return userRepository.save(user);
     }
 
-    // LOGIN
     @PostMapping("/login")
     public String login(@RequestBody AuthRequest request) {
 
@@ -123,7 +118,7 @@ public class AuthController {
             throw new RuntimeException("Invalid credentials");
         }
 
-        // ✅ FIX: Set<String> → CSV String
+        // ✅ Convert Set<String> → String ONLY here
         String rolesCsv = String.join(",", user.getRoles());
 
         return jwtTokenProvider.generateToken(
