@@ -16,6 +16,14 @@ public class ContractServiceImpl implements ContractService {
     ContractRepository contractRepository;
     DeliveryRecordRepository deliveryRecordRepository;
 
+    public ContractServiceImpl(
+            ContractRepository contractRepository,
+            DeliveryRecordRepository deliveryRecordRepository) {
+
+        this.contractRepository = contractRepository;
+        this.deliveryRecordRepository = deliveryRecordRepository;
+    }
+    
     @Override
     public Contract createContract(Contract c) {
         if (c.getBaseContractValue().compareTo(BigDecimal.ZERO) <= 0)
