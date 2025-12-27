@@ -64,17 +64,6 @@
 // }
 
 
-package com.example.demo.controller;
-
-import com.example.demo.dto.AuthRequest;
-import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.security.JwtTokenProvider;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Set;
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -94,15 +83,11 @@ public class AuthController {
     @PostMapping("/register")
     public User register(@RequestBody AuthRequest request) {
 
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("email exists");
-        }
-
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        // ✅ ONLY place roles is set
+        // ✅ ONLY VALID roles assignment
         user.setRoles(Set.of("ROLE_USER"));
 
         return userRepository.save(user);
@@ -118,7 +103,6 @@ public class AuthController {
             throw new RuntimeException("Invalid credentials");
         }
 
-        // ✅ Convert Set<String> → String ONLY here
         String rolesCsv = String.join(",", user.getRoles());
 
         return jwtTokenProvider.generateToken(
