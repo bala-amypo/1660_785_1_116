@@ -16,13 +16,13 @@ public class ContractServiceImpl implements ContractService {
     ContractRepository contractRepository;
     DeliveryRecordRepository deliveryRecordRepository;
 
-    // @Override
-    // public Contract createContract(Contract c) {
-    //     if (c.getBaseContractValue().compareTo(BigDecimal.ZERO) <= 0)
-    //         throw new IllegalArgumentException("Base contract value");
+    @Override
+    public Contract createContract(Contract c) {
+        if (c.getBaseContractValue().compareTo(BigDecimal.ZERO) <= 0)
+            throw new IllegalArgumentException("Base contract value");
 
-    //     return contractRepository.save(c);
-    // }
+        return contractRepository.save(c);
+    }
 
     @Override
     public Contract updateContract(Long id, Contract c) {
