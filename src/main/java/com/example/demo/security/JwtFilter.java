@@ -29,7 +29,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (path.contains("/auth")
         || path.contains("/swagger-ui")
-        || path.contains("/v3/api-docs") {
+        || path.contains("/v3/api-docs")) {
 
             filterChain.doFilter(request, response);
             return;
