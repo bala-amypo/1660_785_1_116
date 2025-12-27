@@ -1,59 +1,59 @@
-// package com.example.demo.security;
+package com.example.demo.security;
 
-// import jakarta.servlet.FilterChain;
-// import jakarta.servlet.ServletException;
-// import jakarta.servlet.http.HttpServletRequest;
-// import jakarta.servlet.http.HttpServletResponse;
-// import org.springframework.stereotype.Component;
-// import org.springframework.web.filter.OncePerRequestFilter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-// import java.io.IOException;
+import java.io.IOException;
 
-// @Component
-// public class JwtFilter extends OncePerRequestFilter {
+@Component
+public class JwtFilter extends OncePerRequestFilter {
 
-//     private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
-//     public JwtFilter(JwtTokenProvider jwtTokenProvider) {
-//         this.jwtTokenProvider = jwtTokenProvider;
-//     }
+    public JwtFilter(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
-//     @Override
-//     protected void doFilterInternal(
-//             HttpServletRequest request,
-//             HttpServletResponse response,
-//             FilterChain filterChain)
-//             throws ServletException, IOException {
+    @Override
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain)
+            throws ServletException, IOException {
 
-//         String path = request.getRequestURI();
+        String path = request.getRequestURI();
 
-//         if (path.contains("/auth")
-//         || path.contains("/swagger-ui")
-//         || path.contains("/v3/api-docs")) {
+        if (path.contains("/auth")
+        || path.contains("/swagger-ui")
+        || path.contains("/v3/api-docs")) {
 
-//             filterChain.doFilter(request, response);
-//             return;
-//         }
+            filterChain.doFilter(request, response);
+            return;
+        }
 
-//         String header = request.getHeader("Authorization");
+        String header = request.getHeader("Authorization");
 
-//         if (header == null || !header.startsWith("Bearer ")) {
-//             //response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                 filterChain.doFilter(request, response);
+        if (header == null || !header.startsWith("Bearer ")) {
+            //response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                filterChain.doFilter(request, response);
 
-//             return;
-//         }
+            return;
+        }
 
-//         String token = header.substring(7);
+        String token = header.substring(7);
 
-//         if (!jwtTokenProvider.validateToken(token)) {
-//             //response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//             filterChain.doFilter(request, response);
-//             return;
-//         }
+        if (!jwtTokenProvider.validateToken(token)) {
+            //response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            filterChain.doFilter(request, response);
+            return;
+        }
 
-//         filterChain.doFilter(request, response);
-//     }
-// }
+        filterChain.doFilter(request, response);
+    }
+}
 
 
