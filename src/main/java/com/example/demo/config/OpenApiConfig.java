@@ -40,6 +40,6 @@ public class OpenApiConfig {
                         .version("1.0")
                         .description("Spring Boot Swagger API"))
                 // 🔑 THIS IS THE KEY
-                .servers(List.of(new Server().url("/")));
+                .servers(List.of(new Server().url("https://9185.pro604cr.amypo.ai")));
     }
 }
