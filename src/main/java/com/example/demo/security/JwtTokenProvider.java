@@ -95,14 +95,14 @@ package com.example.demo.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import java.util.Date;
-import java.util.HashSet;
 
 @Component
 public class JwtTokenProvider {
@@ -110,7 +110,22 @@ public class JwtTokenProvider {
     private static final String SECRET_KEY =
             "mysecretkeymysecretkeymysecretkeymysecretkey";
 
+    private static final long EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 day
+
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+
+    // ✅ GENERATE TOKEN (THIS FIXES YOUR ERROR)
+    public String generateToken(Long userId, String email, Set<String> roles) {
+
+        return Jwts.builder()
+                .setSubject(email)                 // username / email
+                .claim("userId", userId)           // custom claim
+                .claim("roles", roles)             // roles
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+    }
 
     // ✅ VALIDATE TOKEN
     public boolean validateToken(String token) {
@@ -132,9 +147,8 @@ public class JwtTokenProvider {
 
     // ✅ EXTRACT ROLES
     public Set<String> getRoles(String token) {
-        Claims claims = getClaims(token);
-        List<String> roles = claims.get("roles", List.class);
-        return new HashSet<>(roles);
+        List<String> roles = getClaims(token).get("roles", List.class);
+        return Set.copyOf(roles);
     }
 
     private Claims getClaims(String token) {
