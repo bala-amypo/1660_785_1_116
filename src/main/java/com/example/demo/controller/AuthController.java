@@ -64,6 +64,21 @@
 // }
 
 
+package com.example.demo.controller;
+
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.security.JwtTokenProvider;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -80,19 +95,25 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // REGISTER
     @PostMapping("/register")
     public User register(@RequestBody AuthRequest request) {
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("email exists");
+        }
 
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        // ✅ ONLY VALID roles assignment
+        // ✅ roles must be Set<String>
         user.setRoles(Set.of("ROLE_USER"));
 
         return userRepository.save(user);
     }
 
+    // LOGIN
     @PostMapping("/login")
     public String login(@RequestBody AuthRequest request) {
 
@@ -103,6 +124,7 @@ public class AuthController {
             throw new RuntimeException("Invalid credentials");
         }
 
+        // ✅ convert Set<String> → CSV String
         String rolesCsv = String.join(",", user.getRoles());
 
         return jwtTokenProvider.generateToken(
