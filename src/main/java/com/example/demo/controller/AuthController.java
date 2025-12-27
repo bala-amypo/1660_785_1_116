@@ -20,7 +20,7 @@ public class AuthController {
 
     public AuthController(UserRepository userRepository,
                           JwtTokenProvider jwtTokenProvider,
-                          PasswordEncoder passwordEncoder) { /
+                          PasswordEncoder passwordEncoder) { 
         this.userRepository = userRepository;
         this.jwtTokenProvider = jwtTokenProvider;
         this.passwordEncoder = passwordEncoder;

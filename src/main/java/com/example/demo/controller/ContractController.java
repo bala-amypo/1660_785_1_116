@@ -16,10 +16,10 @@ public class ContractController {
         this.service = service;
     }
 
-    @PostMapping
-    public Contract create(@RequestBody Contract c) {
-        return service.createContract(c);
-    }
+    // @PostMapping
+    // public Contract create(@RequestBody Contract c) {
+    //     return service.createContract(c);
+    // }
 
     @PutMapping("/{id}")
     public Contract update(@PathVariable Long id, @RequestBody Contract c) {

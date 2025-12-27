@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ContractService {
 
-    Contract createContract(Contract contract);
+    // Contract createContract(Contract contract);
 
     Contract updateContract(Long id, Contract contract);
 
