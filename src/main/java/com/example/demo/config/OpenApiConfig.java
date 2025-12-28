@@ -27,6 +27,9 @@ import io.swagger.v3.oas.models.*;
 import io.swagger.v3.oas.models.security.*;
 import org.springframework.context.annotation.*;
 
+import java.util.List;
+import io.swagger.v3.oas.models.servers.Server;
+
 @Configuration
 public class OpenApiConfig {
 
