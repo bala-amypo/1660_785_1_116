@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
 
-    // ✅ ONLY ONE CONSTRUCTOR
+    // ✅ ONLY constructor
     public UserServiceImpl(UserRepository userRepository,
                            BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
