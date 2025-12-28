@@ -78,10 +78,13 @@ import java.util.List;
 @Service
 public class PenaltyCalculationServiceImpl implements PenaltyCalculationService {
 
-    private final ContractRepository contractRepository;
-    private final DeliveryRecordRepository deliveryRecordRepository;
-    private final BreachRuleRepository breachRuleRepository;
-    private final PenaltyCalculationRepository penaltyCalculationRepository;
+    ContractRepository contractRepository;
+    DeliveryRecordRepository deliveryRecordRepository;
+    BreachRuleRepository breachRuleRepository;
+    PenaltyCalculationRepository penaltyCalculationRepository;
+
+    public PenaltyCalculationServiceImpl() {
+    }
 
     public PenaltyCalculationServiceImpl(
             ContractRepository contractRepository,
@@ -117,14 +120,16 @@ public class PenaltyCalculationServiceImpl implements PenaltyCalculationService 
                         contract.getAgreedDeliveryDate(),
                         record.getDeliveryDate()));
 
-        BigDecimal rawPenalty =
-                rule.getPenaltyPerDay().multiply(BigDecimal.valueOf(daysDelayed));
+        BigDecimal raw =
+                rule.getPenaltyPerDay()
+                        .multiply(BigDecimal.valueOf(daysDelayed));
 
-        BigDecimal maxPenalty =
+        BigDecimal cap =
                 contract.getBaseContractValue()
-                        .multiply(BigDecimal.valueOf(rule.getMaxPenaltyPercentage() / 100));
+                        .multiply(BigDecimal.valueOf(
+                                rule.getMaxPenaltyPercentage() / 100));
 
-        BigDecimal finalPenalty = rawPenalty.min(maxPenalty);
+        BigDecimal finalPenalty = raw.min(cap);
 
         PenaltyCalculation calc = PenaltyCalculation.builder()
                 .contract(contract)

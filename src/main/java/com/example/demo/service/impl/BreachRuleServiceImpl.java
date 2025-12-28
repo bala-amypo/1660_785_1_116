@@ -61,7 +61,10 @@ import java.util.List;
 @Service
 public class BreachRuleServiceImpl implements BreachRuleService {
 
-    private final BreachRuleRepository breachRuleRepository;
+    BreachRuleRepository breachRuleRepository;
+
+    public BreachRuleServiceImpl() {
+    }
 
     public BreachRuleServiceImpl(BreachRuleRepository breachRuleRepository) {
         this.breachRuleRepository = breachRuleRepository;
@@ -71,12 +74,12 @@ public class BreachRuleServiceImpl implements BreachRuleService {
     public BreachRule createRule(BreachRule rule) {
 
         if (rule.getPenaltyPerDay().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Penalty per day must be > 0");
+            throw new IllegalArgumentException("Penalty per day");
         }
 
         if (rule.getMaxPenaltyPercentage() < 0 ||
             rule.getMaxPenaltyPercentage() > 100) {
-            throw new IllegalArgumentException("Invalid penalty percentage");
+            throw new IllegalArgumentException("percentage");
         }
 
         return breachRuleRepository.save(rule);

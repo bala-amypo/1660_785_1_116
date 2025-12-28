@@ -59,9 +59,12 @@ import java.util.List;
 @Service
 public class BreachReportServiceImpl implements BreachReportService {
 
-    private final BreachReportRepository breachReportRepository;
-    private final PenaltyCalculationRepository penaltyCalculationRepository;
-    private final ContractRepository contractRepository;
+    BreachReportRepository breachReportRepository;
+    PenaltyCalculationRepository penaltyCalculationRepository;
+    ContractRepository contractRepository;
+
+    public BreachReportServiceImpl() {
+    }
 
     public BreachReportServiceImpl(
             BreachReportRepository breachReportRepository,

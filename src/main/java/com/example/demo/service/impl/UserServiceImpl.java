@@ -62,8 +62,11 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    UserRepository userRepository;
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public UserServiceImpl() {
+    }
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -88,6 +91,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new BadRequestException("User not found"));
+                .orElseThrow(() ->
+                        new BadRequestException("User not found"));
     }
 }
