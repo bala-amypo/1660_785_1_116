@@ -39,7 +39,7 @@ public class OpenApiConfig {
                         .type(SecurityScheme.Type.HTTP)
                         .scheme("bearer")
                         .bearerFormat("JWT")))
-            .addSecurityItem(new SecurityRequirement().addList("bearer"));
+            .addSecurityItem(new SecurityRequirement("https://9185.pro604cr.amypo.ai").addList("bearer"));
     }
 }
 
