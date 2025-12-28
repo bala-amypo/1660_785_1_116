@@ -1,15 +1,45 @@
+// package com.example.demo.entity;
+
+// import jakarta.persistence.*;
+// import lombok.*;
+
+// import java.util.Set;
+
+// @Entity
+// @Data
+// @NoArgsConstructor
+// @AllArgsConstructor
+// @Builder
+// public class User {
+
+//     @Id
+//     @GeneratedValue
+//     private Long id;
+
+//     @Column(unique = true)
+//     private String email;
+
+//     private String password;
+
+//     @ElementCollection
+//     private Set<String> roles;
+// }
+
+
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "users")
 public class User {
 
     @Id
@@ -21,6 +51,13 @@ public class User {
 
     private String password;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles;
+
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }
