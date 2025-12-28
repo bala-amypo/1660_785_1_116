@@ -50,6 +50,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,20 +58,20 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider {
 
-    // ✅ 256-bit secure key (REQUIRED by HS256)
-    private static final SecretKey KEY =
-            Keys.hmacShaKeyFor(
-                    "THIS_IS_A_SECURE_256_BIT_SECRET_KEY_FOR_TESTING_ONLY"
-                            .getBytes()
-            );
+    // 🔴 REQUIRED BY TESTS (DO NOT RENAME)
+    String jwtSecret = "THIS_IS_A_SECURE_256_BIT_SECRET_KEY_FOR_TESTING_ONLY";
 
-    private static final long EXPIRATION_MS = 3600_000; // 1 hour
+    private static final long EXPIRATION_MS = 3600_000;
 
-    // ================== GENERATE TOKEN ==================
+    // ================= GENERATE TOKEN =================
     public String generateToken(Long userId, String email, Set<String> roles) {
 
         String rolesCsv = roles.stream()
                 .collect(Collectors.joining(","));
+
+        SecretKey key = Keys.hmacShaKeyFor(
+                jwtSecret.getBytes(StandardCharsets.UTF_8)
+        );
 
         return Jwts.builder()
                 .claim("userId", userId)
@@ -79,30 +80,41 @@ public class JwtTokenProvider {
                 .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
-                .signWith(KEY, SignatureAlgorithm.HS256)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // ================== VALIDATE TOKEN ==================
+    // ================= VALIDATE TOKEN =================
     public boolean validateToken(String token) {
         try {
+            SecretKey key = Keys.hmacShaKeyFor(
+                    jwtSecret.getBytes(StandardCharsets.UTF_8)
+            );
+
             Jwts.parserBuilder()
-                    .setSigningKey(KEY)
+                    .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token);
+
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
     }
 
-    // ================== GET CLAIMS ==================
+    // ================= GET CLAIMS =================
     public Claims getClaims(String token) {
+
+        SecretKey key = Keys.hmacShaKeyFor(
+                jwtSecret.getBytes(StandardCharsets.UTF_8)
+        );
+
         return Jwts.parserBuilder()
-                .setSigningKey(KEY)
+                .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
 }
+
 
