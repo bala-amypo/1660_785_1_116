@@ -69,7 +69,7 @@ import io.swagger.v3.oas.models.*;
 import io.swagger.v3.oas.models.security.*;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.*;
-import org.springframework.beans.factory.annotation.Value; // <--- ADD THIS IMPORT
+import org.springframework.beans.factory.annotation.Value; // <--- This was missing
 
 import java.util.List;
 
@@ -77,11 +77,11 @@ import java.util.List;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI customOpenAPI(@Value("${app.url:http://localhost:9001}") String appUrl) {
+    public OpenAPI customOpenAPI(@Value("${app.url}") String appUrl) {
         return new OpenAPI()
             .servers(List.of(
-                        new Server().url(appUrl)
-                ))
+                new Server().url(appUrl)
+            ))
             .components(new Components()
                 .addSecuritySchemes("bearer",
                     new SecurityScheme()
