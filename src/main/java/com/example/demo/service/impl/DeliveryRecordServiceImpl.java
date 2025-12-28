@@ -59,8 +59,11 @@ import java.util.List;
 @Service
 public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 
-    private final DeliveryRecordRepository deliveryRecordRepository;
-    private final ContractRepository contractRepository;
+    DeliveryRecordRepository deliveryRecordRepository;
+    ContractRepository contractRepository;
+
+    public DeliveryRecordServiceImpl() {
+    }
 
     public DeliveryRecordServiceImpl(DeliveryRecordRepository deliveryRecordRepository,
                                      ContractRepository contractRepository) {
@@ -72,12 +75,13 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
     public DeliveryRecord createDeliveryRecord(DeliveryRecord record) {
 
         if (record.getDeliveryDate().isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Delivery date cannot be in the future");
+            throw new IllegalArgumentException("in the future");
         }
 
         Contract contract = contractRepository.findById(
                 record.getContract().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Contract not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Contract not found"));
 
         record.setContract(contract);
         return deliveryRecordRepository.save(record);
