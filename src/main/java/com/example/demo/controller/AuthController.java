@@ -67,12 +67,12 @@
 
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthRequest;
-import com.example.demo.dto.AuthResponse;
 import com.example.demo.entity.User;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -88,17 +88,17 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody AuthRequest request) {
+    public User register(@RequestBody Map<String, String> body) {
         return userService.registerUser(
-                request.getEmail(),
-                request.getPassword()
+                body.get("email"),
+                body.get("password")
         );
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest request) {
+    public Map<String, String> login(@RequestBody Map<String, String> body) {
 
-        User user = userService.getUserByEmail(request.getEmail());
+        User user = userService.getUserByEmail(body.get("email"));
 
         String token = jwtTokenProvider.generateToken(
                 user.getId(),
@@ -106,6 +106,6 @@ public class AuthController {
                 user.getRoles()
         );
 
-        return new AuthResponse(token);
+        return Map.of("token", token);
     }
 }
