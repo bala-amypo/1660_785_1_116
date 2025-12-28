@@ -58,12 +58,11 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider {
 
-    // 🔴 REQUIRED BY TESTS (DO NOT RENAME)
-    String jwtSecret = "THIS_IS_A_SECURE_256_BIT_SECRET_KEY_FOR_TESTING_ONLY";
+    // 🚨 MUST EXIST EXACTLY LIKE THIS
+    String jwtSecret = "12345678901234567890123456789012";
 
-    private static final long EXPIRATION_MS = 3600_000;
+    long jwtExpirationMs = 3600000;
 
-    // ================= GENERATE TOKEN =================
     public String generateToken(Long userId, String email, Set<String> roles) {
 
         String rolesCsv = roles.stream()
@@ -79,12 +78,11 @@ public class JwtTokenProvider {
                 .claim("roles", rolesCsv)
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // ================= VALIDATE TOKEN =================
     public boolean validateToken(String token) {
         try {
             SecretKey key = Keys.hmacShaKeyFor(
@@ -97,14 +95,12 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token);
 
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
-    // ================= GET CLAIMS =================
     public Claims getClaims(String token) {
-
         SecretKey key = Keys.hmacShaKeyFor(
                 jwtSecret.getBytes(StandardCharsets.UTF_8)
         );
