@@ -49,19 +49,6 @@
 //     }
 // }
 
-// @Bean
-// public OpenAPI customOpenAPI(@Value("${app.url:http://localhost:8080}") String appUrl) {
-//     return new OpenAPI()
-//         .addServersItem(new Server().url(appUrl)) // defined in application.properties or defaults to localhost
-//         .components(new Components()
-//             .addSecuritySchemes("bearer",
-//                 new SecurityScheme()
-//                     .type(SecurityScheme.Type.HTTP)
-//                     .scheme("bearer")
-//                     .bearerFormat("JWT")))
-//         .addSecurityItem(new SecurityRequirement().addList("bearer"));
-// }
-
 
 package com.example.demo.config;
 
@@ -69,15 +56,16 @@ import io.swagger.v3.oas.models.*;
 import io.swagger.v3.oas.models.security.*;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.*;
-import org.springframework.beans.factory.annotation.Value; // <--- This was missing
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
 @Configuration
 public class OpenApiConfig {
 
+    // Updated default to port 9001
     @Bean
-    public OpenAPI customOpenAPI(@Value("${app.url}") String appUrl) {
+    public OpenAPI customOpenAPI(@Value("${app.url:http://localhost:9001}") String appUrl) {
         return new OpenAPI()
             .servers(List.of(
                 new Server().url(appUrl)
