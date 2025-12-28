@@ -43,46 +43,66 @@
 
 
 
-
 package com.example.demo.security;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
 
-    private String jwtSecret = "secret";
-    private long jwtExpirationMs = 86400000;
+    // ✅ 256-bit secure key (REQUIRED by HS256)
+    private static final SecretKey KEY =
+            Keys.hmacShaKeyFor(
+                    "THIS_IS_A_SECURE_256_BIT_SECRET_KEY_FOR_TESTING_ONLY"
+                            .getBytes()
+            );
 
+    private static final long EXPIRATION_MS = 3600_000; // 1 hour
+
+    // ================== GENERATE TOKEN ==================
     public String generateToken(Long userId, String email, Set<String> roles) {
+
+        String rolesCsv = roles.stream()
+                .collect(Collectors.joining(","));
 
         return Jwts.builder()
                 .claim("userId", userId)
                 .claim("email", email)
-                .claim("roles", String.join(",", roles))
+                .claim("roles", rolesCsv)
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS256, jwtSecret)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
+                .signWith(KEY, SignatureAlgorithm.HS256)
                 .compact();
     }
 
+    // ================== VALIDATE TOKEN ==================
     public boolean validateToken(String token) {
         try {
-            getClaims(token);
+            Jwts.parserBuilder()
+                    .setSigningKey(KEY)
+                    .build()
+                    .parseClaimsJws(token);
             return true;
-        } catch (Exception e) {
+        } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
     }
 
+    // ================== GET CLAIMS ==================
     public Claims getClaims(String token) {
-        return Jwts.parser().setSigningKey(jwtSecret)
+        return Jwts.parserBuilder()
+                .setSigningKey(KEY)
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
 }
+
