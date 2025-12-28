@@ -21,25 +21,25 @@
 
 
 
-package com.example.demo.config;
+// package com.example.demo.config;
 
-import io.swagger.v3.oas.models.*;
-import io.swagger.v3.oas.models.security.*;
-import org.springframework.context.annotation.*;
+// import io.swagger.v3.oas.models.*;
+// import io.swagger.v3.oas.models.security.*;
+// import org.springframework.context.annotation.*;
 
-@Configuration
-public class OpenApiConfig {
+// @Configuration
+// public class OpenApiConfig {
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-            .components(new Components()
-                .addSecuritySchemes("bearer",
-                    new SecurityScheme()
-                        .type(SecurityScheme.Type.HTTP)
-                        .scheme("bearer")
-                        .bearerFormat("JWT")))
-            .addSecurityItem(new SecurityRequirement().addList("bearer"));
-    }
-}
+//     @Bean
+//     public OpenAPI customOpenAPI() {
+//         return new OpenAPI()
+//             .components(new Components()
+//                 .addSecuritySchemes("bearer",
+//                     new SecurityScheme()
+//                         .type(SecurityScheme.Type.HTTP)
+//                         .scheme("bearer")
+//                         .bearerFormat("JWT")))
+//             .addSecurityItem(new SecurityRequirement().addList("bearer"));
+//     }
+// }
 
