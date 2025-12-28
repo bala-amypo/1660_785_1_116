@@ -38,14 +38,14 @@ public class OpenApiConfig {
         return new OpenAPI()
             .servers(List.of(
                         new Server().url("https://9185.pro604cr.amypo.ai/")
-                ))
-            .components(new Components()
-                .addSecuritySchemes("bearer",
-                    new SecurityScheme()
-                        .type(SecurityScheme.Type.HTTP)
-                        .scheme("bearer")
-                        .bearerFormat("JWT")))
-            .addSecurityItem(new SecurityRequirement().addList("bearer"));
+                ));
+            // .components(new Components()
+            //     .addSecuritySchemes("bearer",
+            //         new SecurityScheme()
+            //             .type(SecurityScheme.Type.HTTP)
+            //             .scheme("bearer")
+            //             .bearerFormat("JWT")))
+            // .addSecurityItem(new SecurityRequirement().addList("bearer"));
     }
 }
 
