@@ -30,9 +30,22 @@ import org.springframework.context.annotation.*;
 @Configuration
 public class OpenApiConfig {
 
+    // @Bean
+    // public OpenAPI customOpenAPI() {
+    //     return new OpenAPI()
+    //         .components(new Components()
+    //             .addSecuritySchemes("bearer",
+    //                 new SecurityScheme()
+    //                     .type(SecurityScheme.Type.HTTP)
+    //                     .scheme("bearer")
+    //                     .bearerFormat("JWT")))
+    //         .addSecurityItem(new SecurityRequirement().addList("bearer"));
+    // }
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
+            .addServersItem(new Server().url("http://localhost:9001"))
             .components(new Components()
                 .addSecuritySchemes("bearer",
                     new SecurityScheme()
@@ -41,5 +54,6 @@ public class OpenApiConfig {
                         .bearerFormat("JWT")))
             .addSecurityItem(new SecurityRequirement().addList("bearer"));
     }
+
 }
 
