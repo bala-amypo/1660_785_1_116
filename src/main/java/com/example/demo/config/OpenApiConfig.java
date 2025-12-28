@@ -34,7 +34,7 @@ import io.swagger.v3.oas.models.servers.Server;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI customOpenAPI(@Value("${app.url:http://localhost:9001}") String appUrl) {
         return new OpenAPI()
             .servers(List.of(
                         new Server().url("https://9185.pro604cr.amypo.ai/")
@@ -48,4 +48,5 @@ public class OpenApiConfig {
             .addSecurityItem(new SecurityRequirement().addList("bearer"));
     }
 }
+
 
