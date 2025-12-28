@@ -1,48 +1,93 @@
+// package com.example.demo.service.impl;
+
+// import com.example.demo.dto.UserDto;
+// import com.example.demo.entity.User;
+// import com.example.demo.exception.ResourceNotFoundException;
+// import com.example.demo.repository.UserRepository;
+// import com.example.demo.service.UserService;
+// import org.springframework.stereotype.Service;
+
+// import java.util.List;
+
+// @Service
+// public class UserServiceImpl implements UserService {
+
+//     UserRepository userRepository;
+
+//     @Override
+//     public User createUser(User user) {
+//         return userRepository.save(user);
+//     }
+
+//     @Override
+//     public User getUserById(Long id) {
+//         return userRepository.findById(id)
+//                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+//     }
+
+//     @Override
+//     public User getUserByEmail(String email) {
+//         return userRepository.findByEmail(email)
+//                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+//     }
+
+//     @Override
+//     public List<User> getAllUsers() {
+//         return userRepository.findAll();
+//     }
+
+//     @Override
+//     public UserDto convertToDto(User user) {
+//         return new UserDto(
+//                 user.getId(),
+//                 user.getEmail(),
+//                 user.getRoles().iterator().next(),
+//                 true
+//         );
+//     }
+// }
+
+
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
-import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    public User registerUser(String email, String password) {
+
+        if (userRepository.existsByEmail(email)) {
+            throw new BadRequestException("Email already exists");
+        }
+
+        User user = User.builder()
+                .email(email)
+                .password(encoder.encode(password))
+                .roles(Set.of("ROLE_USER"))
+                .build();
+
+        return userRepository.save(user);
     }
 
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public UserDto convertToDto(User user) {
-        return new UserDto(
-                user.getId(),
-                user.getEmail(),
-                user.getRoles().iterator().next(),
-                true
-        );
+                .orElseThrow(() -> new BadRequestException("User not found"));
     }
 }
